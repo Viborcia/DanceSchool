@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  
+  get 'student/home'
+  devise_for :users
+  get 'main/main_stage'
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -7,4 +12,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  root "main#main_stage"
+  get 'main_stage', to: "main#main_stage", as: 'danceschool'
+  get 'login', to: "new_user_session_path", as: 'login'
+  get 'help', to: "main#help", as: 'help'
+  get 'contact', to: "main#contact", as: 'contact'
 end
