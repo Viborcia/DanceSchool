@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   # root "posts#index"
   root "main#main_stage"
   get 'main_stage', to: "main#main_stage", as: 'danceschool'
-  get 'login', to: "new_user_session_path", as: 'login'
+  get 'login', to: "main#login", as: 'login'
   get 'help', to: "main#help", as: 'help'
   get 'contact', to: "main#contact", as: 'contact'
 end

@@ -1,0 +1,10 @@
+
+<h1>Student#home</h1>
+<p>Find me in app/views/student/home.html.erb</p>
+
+<% if current_user %>
+<p>Hello<% current_user.email %>!</p>
+<p>you have...</p>
+<% else %>
+<p>You are not sign in</p>
+<% end %>
