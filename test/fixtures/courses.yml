@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  namberOfPlace: 1
+  startDate: 2024-09-02 09:53:50
+
+two:
+  name: MyString
+  description: MyText
+  namberOfPlace: 1
+  startDate: 2024-09-02 09:53:50
