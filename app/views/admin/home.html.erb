@@ -1,0 +1,10 @@
+
+<h1>Admin#home</h1>
+<p>Find me in app/views/admin/home.html.erb</p>
+<p>Admin</p>
+<% if current_user %>
+<p>Hello<% current_user.email %>!</p>
+<p>you have...</p>
+<% else %>
+<p>You are not sign in</p>
+<% end %>

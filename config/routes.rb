@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   resources :courses
   
-  get 'student/home'
-  devise_for :users
-  get 'main/main_stage'
+  #get 'student/home'
+  devise_for :users, controllers: { sessions: 'sessions' }
+
+  #get 'main/main_stage'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -18,4 +19,14 @@ Rails.application.routes.draw do
   get 'login', to: "main#login", as: 'login'
   get 'help', to: "main#help", as: 'help'
   get 'contact', to: "main#contact", as: 'contact'
+
+  #student
+  get 'student', to: "student#home", as: 'student'
+
+  #teacher
+  get 'teacher', to: "teacher#home", as: 'teacher'
+
+  #admin
+  get 'admin', to: "admin#home", as: 'admin'
+
 end

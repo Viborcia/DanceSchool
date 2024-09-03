@@ -14,14 +14,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_02_075350) do
   create_table "courses", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.integer "namberOfPlace"
-    t.datetime "startDate"
+    t.integer "namber_of_place"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
+    t.string "first_name"
+    t.string "last_name"
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -33,6 +36,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_02_075350) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "courses", "users"
+ 
 
 end
