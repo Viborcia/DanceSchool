@@ -1,14 +1,56 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>DanceSchool</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dance School</title>
+<%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+<%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 
-   <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  </head>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<style>
+  .navbar-nav > li {
+    display: inline-block; 
+  }
+  .navbar-nav {
+    display: inline-block;
+    float: none; 
+
+  }
+  .navbar-nav > li:hover {
+    color: #ffeb3b !important; 
+    background-color: #e91e63 !important; 
+}
+  .navbar {
+      background-color: #f55192;
+      color: #fcfcfc ;
+      border-color: #e7e7e7;     
+    }
+    .navbar-nav > li.active > a{
+    background-color: #fcfcfc !important;  
+    color: #000 !important;       
+}
+.navbar-nav > li > a {
+  color: #fcfcfc !important; 
+}
+.navbar-nav > li:hover > a {
+            color: #ffeb3b !important; 
+            background-color: #e91e63 !important; 
+        }
+        .navbar-brand {
+          color:  #fcfcfc !important; 
+            
+        }
+
+
+
+
+
+</style>
+
+</head>
 
   <body>
     <%= yield %>

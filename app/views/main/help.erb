@@ -1,27 +1,22 @@
-<div class="container">
-<div class="a">
-<%= image_tag "logo2.png", height: 90 %>
-</div>
-<div class="b">
-<div id="bookmarksContainer">
-<ol>
-<li><%= link_to "Home", "/main_stage", class:"bookmark", id: "bookmark1" %></li>
-<li><%= link_to "Logowanie", "/login", class:"bookmark" , id: "bookmark4"%></li>
-<li><%= link_to "Pomoc", "/help", class:"bookmark", id: "bookmark2" %></li>
-<li><%= link_to "Kontakt", "/contact", class:"bookmark", id: "bookmark3" %></li>
-</ol>
-</div>
-
-</div>
-<h1>Dance School</h1>
-
-<div class="search">
-<form>
-<input type="search" id="searchInput" placeholder="Szukaj na stronie...">
-<button type="button" class="button" id="searchButton"><b> 🔎 </b></button>
-</form>
-
-</div>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Dance School</a>
+    </div>
+    <ul class="nav navbar-nav">
+    <li ><a href="/main_stage">Home</a></li>
+    <li><a href="/login">Logowanie</a></li>
+    <li class="active"><a href="/help">Pomoc</a></li>
+    <li><a href="/contact">Kontakt</a></li>
+  </ul>
+    <form class="navbar-form navbar-left" action="/action_page.php">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Szukaj na stronie...">
+      </div>
+      <button type="submit" class="btn btn-default" id="searchButton"><b> 🔎 </b></button>
+    </form>
+  </div>
+</nav>
 
 <div class="main">
 <center>Witaj w systemie obsługi pracy dyplomowej!</center>
