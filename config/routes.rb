@@ -22,11 +22,14 @@ Rails.application.routes.draw do
 
   #student
   get 'student', to: "student#home", as: 'student'
+  get 'student_sign_out', to: 'student#student_sign_out', as: 'student_sign_out'
 
   #teacher
   get 'teacher', to: "teacher#home", as: 'teacher'
+  get 'teacher_sign_out', to: 'teacher#teacher_sign_out', as: 'teacher_sign_out'
 
   #admin
   get 'admin', to: "admin#home", as: 'admin'
+  get 'admin_sign_out', to: 'admin#admin_sign_out', as: 'admin_sign_out'
 
 end

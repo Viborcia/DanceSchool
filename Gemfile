@@ -72,3 +72,6 @@ gem "devise", "~> 4.9"
 
 gem 'rails-erd'
 
+gem 'sassc-rails'
+
+gem 'bootstrap', '~> 5.0.0'
