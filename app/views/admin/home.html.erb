@@ -1,10 +1,66 @@
-
+<% if current_user %>
 <h1>Admin#home</h1>
 <p>Find me in app/views/admin/home.html.erb</p>
 <p>Admin</p>
-<% if current_user %>
+<div class="container">
+<div class="b">
+<div id="bookmarksContainer">
+<ol>
+<li><%= link_to "Home", "/main_stage", class:"bookmark", id: "bookmark1" %></li>
+<li><%= link_to "Grafik", "/grafik", class:"bookmark" , id: "bookmark4"%></li>
+<li><%= link_to "Zapis", "/help", class:"bookmark", id: "bookmark2" %></li>
+<li><%= link_to "Profil", "/profil", class:"bookmark", id: "bookmark3" %></li>
+<li><%= link_to "Wyloguj", "/wyloguj", class:"bookmark", id: "bookmark5" %></li>
+</ol>
+</div>
+
+</div>
+<h1>Dance School</h1>
+
+<div class="search">
+<form>
+<input type="search" id="searchInput" placeholder="Szukaj na stronie...">
+<button type="button" class="button" id="searchButton"><b> 🔎 </b></button>
+</form>
+
+</div>
+</div>
+
 <p>Hello<% current_user.email %>!</p>
 <p>you have...</p>
 <% else %>
 <p>You are not sign in</p>
 <% end %>
+
+<footer>
+    <p>&copy; 2024 Dance School</p>
+</footer>
+
+<script>
+
+function redirectToMatchingBookmark() {
+ 
+    var searchText = document.getElementById('searchInput').value.toLowerCase();
+
+    var bookmarks = document.querySelectorAll('.bookmark');
+
+    for (var i = 0; i < bookmarks.length; i++) {
+        var bookmark = bookmarks[i];
+      
+        var bookmarkText = bookmark.innerText.toLowerCase();
+
+        if (bookmarkText.includes(searchText)) {
+            // Przekieruj do pasującej zakładki
+            window.location.href = bookmark.href;
+            return;
+        }
+    }
+
+    alert("Nie znaleziono pasującej zakładki");
+}
+
+document.getElementById('searchButton').addEventListener('click', function() {
+    redirectToMatchingBookmark();
+});
+
+</script>
