@@ -1,20 +1,31 @@
 <% if current_user %>
-<h1>Student#home</h1>
-<p>Find me in app/views/student/home.html.erb</p>
-<div class="container">
-<div class="b">
-<div id="bookmarksContainer">
-<ol>
-<li><%= link_to "Home", "/main_stage", class:"bookmark", id: "bookmark1" %></li>
-<li><%= link_to "Grafik", "/grafik", class:"bookmark" , id: "bookmark4"%></li>
-<li><%= link_to "Zajęcia", "/zajecia", class:"bookmark", id: "bookmark2" %></li>
-<li><%= link_to "Profil", "/profil", class:"bookmark", id: "bookmark3" %></li>
-<li><%= link_to "Wyloguj", "/student_sign_out", class:"bookmark", id: "bookmark5" %></li>
-</ol>
-</div>
-
-</div>
-<h1>Dance School</h1>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header ">
+    <a class="navbar-brand" href="#">
+    <%= image_tag 'logo2.jpg', id: 'Logo' %> Dance School
+  </a>
+  
+    </div>
+    <ul class="nav nav-pills navbar-left">
+    <li class="active"><a href="/student">Home</a></li>
+      <li><a href="/grafik">Grafik</a></li>
+      <li><a href="/zajecia">Moje Zajęcia</a></li>
+      <li><a href="/profil">Profil</a></li>
+      <li><a href="/student_sign_out">Wyloguj</a></li>
+    </ul>
+    <form class="navbar-form navbar-right" style="display: flex; align-items: center;">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Szukaj na stronie...">
+      </div>
+      <button type="submit" class="btn btn-default" id="searchButton"><b> 🔎 </b></button>
+    </form>
+    <div class="navbar-right" style="display: flex; align-items: center; margin-left: 10px;">
+      <button type="button" class="btn btn-primary btn btn-default navbar-btn"><%= link_to "Profil", "/profil", style:"color:white; text-decoration: none;" %></button>
+<%= button_to "Wyloguj się", destroy_user_session_path, method: :delete, class: "btn btn-primary btn-default navbar-btn", style: "color:white; text-decoration: none;" %>
+    </div>
+  </div>
+</nav>
 
 <div class="search">
 <form>
