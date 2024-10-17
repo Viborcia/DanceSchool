@@ -14,9 +14,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_02_075350) do
   create_table "courses", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.integer "namber_of_place"
-    t.datetime "start_date"
-    t.datetime "end_date"
+    t.integer "namberOfPlace"
+    t.string "level"
+    t.datetime "startDate"
+    t.datetime "endDate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
