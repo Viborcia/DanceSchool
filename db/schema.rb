@@ -36,6 +36,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_02_075350) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
- 
+  create_table "courses_users", id: false do |t|
+    t.integer "course_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+  
+  add_index :courses_users, :course_id
+  add_index :courses_users, :user_id
+  add_index :courses_users, [:course_id, :user_id], unique: true
 
 end
