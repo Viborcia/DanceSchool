@@ -1,3 +1,4 @@
+<% if current_user %>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header ">
@@ -7,11 +8,11 @@
   
     </div>
     <ul class="nav nav-pills navbar-left">
-    <li><a href="/student">Home</a></li>
+    <li class="active"><a href="/student">Home</a></li>
       <li><a href="/grafik">Grafik</a></li>
       <li><a href="/zajecia">Moje Zajęcia</a></li>
       <li><a href="/profile">Profil</a></li>
-      <li class="active"><a href="/student_sign_out">Wyloguj</a></li>
+      <li><a href="/student_sign_out">Wyloguj</a></li>
     </ul>
     <form class="navbar-form navbar-right" style="display: flex; align-items: center;">
       <div class="form-group">
@@ -26,43 +27,50 @@
   </div>
 </nav>
 
-<div class="g">
-<% if user_signed_in? %>
-<h2>Czy na pewno chcesz się wylogować?</h2>
-<center><%= button_to "Wyloguj się", destroy_user_session_path, method: :delete, class:"button" %></center>
-<% end %>
+<div class="search">
+<form>
+<input type="search" id="searchInput" placeholder="Szukaj na stronie...">
+<button type="button" class="button" id="searchButton"><b> 🔎 </b></button>
+</form>
+
 </div>
 </div>
 
+<p>Hello<% current_user.email %>!</p>
+<p>you have...</p>
+<% else %>
+<p>You are not sign in</p>
+<% end %>
+
 <footer>
-    <p>&copy; 2023 Obsługa Pracy Dyplomowej</p>
+    <p>&copy; 2024 Dance School</p>
 </footer>
 
 <script>
 
 function redirectToMatchingBookmark() {
  
-var searchText = document.getElementById('searchInput').value.toLowerCase();
+    var searchText = document.getElementById('searchInput').value.toLowerCase();
 
-var bookmarks = document.querySelectorAll('.bookmark');
+    var bookmarks = document.querySelectorAll('.bookmark');
 
-for (var i = 0; i < bookmarks.length; i++) {
-    var bookmark = bookmarks[i];
-  
-    var bookmarkText = bookmark.innerText.toLowerCase();
+    for (var i = 0; i < bookmarks.length; i++) {
+        var bookmark = bookmarks[i];
+      
+        var bookmarkText = bookmark.innerText.toLowerCase();
 
-    if (bookmarkText.includes(searchText)) {
-        // Przekieruj do pasującej zakładki
-        window.location.href = bookmark.href;
-        return;
+        if (bookmarkText.includes(searchText)) {
+            // Przekieruj do pasującej zakładki
+            window.location.href = bookmark.href;
+            return;
+        }
     }
-}
 
-alert("Nie znaleziono pasującej zakładki");
+    alert("Nie znaleziono pasującej zakładki");
 }
 
 document.getElementById('searchButton').addEventListener('click', function() {
-redirectToMatchingBookmark();
+    redirectToMatchingBookmark();
 });
 
 </script>

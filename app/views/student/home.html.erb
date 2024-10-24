@@ -1,4 +1,4 @@
-<% if current_user %>
+
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header ">
@@ -11,7 +11,7 @@
     <li class="active"><a href="/student">Home</a></li>
       <li><a href="/grafik">Grafik</a></li>
       <li><a href="/zajecia">Moje Zajęcia</a></li>
-      <li><a href="/profil">Profil</a></li>
+      <li><a href="/student_profile">Profil</a></li>
       <li><a href="/student_sign_out">Wyloguj</a></li>
     </ul>
     <form class="navbar-form navbar-right" style="display: flex; align-items: center;">
@@ -21,7 +21,7 @@
       <button type="submit" class="btn btn-default" id="searchButton"><b> 🔎 </b></button>
     </form>
     <div class="navbar-right" style="display: flex; align-items: center; margin-left: 10px;">
-      <button type="button" class="btn btn-primary btn btn-default navbar-btn"><%= link_to "Profil", "/profil", style:"color:white; text-decoration: none;" %></button>
+      <button type="button" class="btn btn-primary btn btn-default navbar-btn"><%= link_to "Profil", "/student_profile", style:"color:white; text-decoration: none;" %></button>
 <%= button_to "Wyloguj się", destroy_user_session_path, method: :delete, class: "btn btn-primary btn-default navbar-btn", style: "color:white; text-decoration: none;" %>
     </div>
   </div>

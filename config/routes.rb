@@ -23,10 +23,16 @@ Rails.application.routes.draw do
 
   #student
   get 'student', to: "student#home", as: 'student'
+  get 'grafik', to: "student#grafik", as: 'grafik'
+  get 'my_course', to: "student#my_course", as: 'my_course'
+  get 'student_profile', to: "student#student_profile", as: 'student_profile'
   get 'student_sign_out', to: 'student#student_sign_out', as: 'student_sign_out'
 
   #teacher
   get 'teacher', to: "teacher#home", as: 'teacher'
+  get 'instructor_grafik', to: "teacher#instructor_grafik", as: 'instructor_grafik'
+  get 'own_course', to: "teacher#own_course", as: 'own_course'
+  get 'teacher_profile', to: "teacher#teacher_profile", as: 'teacher_profile'
   get 'teacher_sign_out', to: 'teacher#teacher_sign_out', as: 'teacher_sign_out'
 
   #admin
