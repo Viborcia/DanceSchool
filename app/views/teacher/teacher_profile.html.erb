@@ -43,7 +43,8 @@
   <div class="card-body">
     <h5 class="card-title fw-lighter"><b><span class="badge text-bg-primary" style="font-size:20px">Twój profil</span></b></h5>
     <p class="card-text fw-lighter" style="text-align:left;">Tutaj możesz zobaczyć informacje o swoim profilu.</p>
-  </div>
+    <button type="button" class="btn btn-primary btn btn-default navbar-btn"><%= link_to "Edytuj profil", edit_user_registration_path, style:"color:white; text-decoration: none;" %></button>  
+    </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item fw-lighter" style="text-align:left;"><span style="font-weight:500">E-mail:</span> <%= current_user.email %></li>
     <li class="list-group-item fw-lighter" style="text-align:left"><span style="font-weight:500">Imię:</span> <%= current_user.first_name %></b></li>

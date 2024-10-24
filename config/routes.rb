@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :courses
   
   #get 'student/home'
-  devise_for :users, controllers: { sessions: 'sessions' }
+  devise_for :users, controllers: { sessions: 'sessions', registrations: 'registrations' }
 
   #get 'main/main_stage'
 
