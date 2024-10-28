@@ -13,17 +13,27 @@
 ActiveRecord::Schema[7.1].define(version: 2024_09_02_075350) do
   create_table "courses", force: :cascade do |t|
     t.string "name"
+    t.string "instructor"
     t.text "description"
-    t.integer "namberOfPlace"
+    t.integer "namber_of_place"
     t.string "level"
-    t.datetime "startDate"
-    t.datetime "endDate"
+    t.integer "namber_of_lessons"
+    t.boolean "is_pair", null: false
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "courses_users", id: false, force: :cascade do |t|
     t.integer "course_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "lessons_users", id: false, force: :cascade do |t|
+    t.integer "lesson_id", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -54,4 +64,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_02_075350) do
   add_index :courses_users, :course_id
   add_index :courses_users, :user_id
   add_index :courses_users, [:course_id, :user_id], unique: true
+  add_index :lessons_users, :lesson_id
+  add_index :lessons_users, :user_id
+  add_index :lessons_users, [:lesson_id, :user_id], unique: true
 end
