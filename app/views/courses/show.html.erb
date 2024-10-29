@@ -46,6 +46,22 @@
     </li>
   <% end %>
 </ul>
+<h2>Lessons for <%= @course.name %></h2>
+
+<ul>
+  <% @course.lessons.each do |lesson| %>
+    <li>
+      <%= link_to lesson.name, lesson_path(lesson) %> - <%= lesson.date.strftime("%B %d, %Y at %I:%M %p") %>
+      <% if current_user && !lesson.users.include?(current_user) %>
+        <%= form_with url: enroll_lesson_path(lesson), method: :post do %>
+    <%= submit_tag "Enroll in this lesson" %>
+  <% end %>
+      <% else %>
+        (Already enrolled)
+      <% end %>
+    </li>
+  <% end %>
+</ul>
 
 <div>
   <%= link_to "Edit this course", edit_course_path(@course) %> |
