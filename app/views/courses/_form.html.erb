@@ -22,8 +22,13 @@
   </div>
 
   <div>
-    <%= form.label :namberOfPlace, style: "display: block" %>
-    <%= form.number_field :namberOfPlace %>
+    <%= form.label :namber_of_place, style: "display: block" %>
+    <%= form.number_field :namber_of_place %>
+  </div>
+
+  <div>
+    <%= form.label :namber_of_lessons, style: "display: block" %>
+    <%= form.number_field :namber_of_lessons %>
   </div>
 
   <div>
@@ -32,9 +37,23 @@
 </div>
 
   <div>
-    <%= form.label :startDate, style: "display: block" %>
-    <%= form.datetime_field :startDate %>
+    <%= form.label :start_date, style: "display: block" %>
+    <%= form.datetime_field :start_date %>
   </div>
+
+  <div>
+  <%= form.label :is_pair, "Czy taniec w parze?", style: "display: block" %>
+  
+  <div>
+    <%= form.radio_button :is_pair, true %>
+    <%= form.label :is_pair_true, "Tak" %>
+  </div>
+  
+  <div>
+    <%= form.radio_button :is_pair, false %>
+    <%= form.label :is_pair_false, "Nie" %>
+  </div>
+</div>
 
   <div>
     <%= form.submit %>
