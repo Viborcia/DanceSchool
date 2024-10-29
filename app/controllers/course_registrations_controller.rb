@@ -6,7 +6,7 @@ class CourseRegistrationsController < ApplicationController
         if course.users.include?(current_user)
           redirect_to course, alert: 'You are already enrolled in this course.'
         # Sprawdzenie, czy są dostępne miejsca
-        elsif course.users.count >= course.namberOfPlace
+        elsif course.users.count >= course.number_of_place
           redirect_to course, alert: 'The course is full.', notice: 'The course is full.'
         else
           # Dodanie użytkownika do kursu

@@ -15,7 +15,7 @@ class CoursesTest < ApplicationSystemTestCase
     click_on "New course"
 
     fill_in "Description", with: @course.description
-    fill_in "Namberofplace", with: @course.namberOfPlace
+    fill_in "Numberofplace", with: @course.number_of_place
     fill_in "Name", with: @course.name
     fill_in "Startdate", with: @course.startDate
     click_on "Create Course"
@@ -29,7 +29,7 @@ class CoursesTest < ApplicationSystemTestCase
     click_on "Edit this course", match: :first
 
     fill_in "Description", with: @course.description
-    fill_in "Namberofplace", with: @course.namberOfPlace
+    fill_in "Numberofplace", with: @course.number_of_place
     fill_in "Name", with: @course.name
     fill_in "Startdate", with: @course.startDate
     click_on "Update Course"

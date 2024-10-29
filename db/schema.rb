@@ -15,9 +15,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_02_075350) do
     t.string "name"
     t.string "instructor"
     t.text "description"
-    t.integer "namber_of_place"
+    t.integer "number_of_place"
     t.string "level"
-    t.integer "namber_of_lessons"
+    t.integer "number_of_lessons"
     t.boolean "is_pair", null: false
     t.datetime "start_date"
     t.datetime "end_date"
@@ -40,7 +40,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_02_075350) do
   end
 
   create_table "lessons", force: :cascade do |t|
-    t.integer "number"
+    t.string "name"
     t.datetime "date"
     t.integer "number_of_additional_places"
     t.integer "course_id", null: false

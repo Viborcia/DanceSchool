@@ -36,6 +36,17 @@
   <% end %>
 </ul>
 
+<h2>Lekcje:</h2>
+<ul>
+  <% @course.lessons.each do |lesson| %>
+    <li>
+      <strong>Nazwa:</strong> <%= lesson.name %>
+      <br>
+      <strong>Data:</strong> <%= lesson.date.strftime("%Y-%m-%d %H:%M") if lesson.date %>
+    </li>
+  <% end %>
+</ul>
+
 <div>
   <%= link_to "Edit this course", edit_course_path(@course) %> |
   <%= link_to "Back to courses", courses_path %>
