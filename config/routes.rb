@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   end
   
   #get 'student/home'
-  devise_for :users, controllers: { sessions: 'sessions', registrations: 'registrations' }
+  devise_for :users, controllers: {  registrations: 'registrations' }
 
   #get 'main/main_stage'
 
