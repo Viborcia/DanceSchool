@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :courses do
     resources :course_registrations, only: [:create]
   end
-  
+
   #get 'student/home'
   devise_for :users, controllers: {  registrations: 'registrations' }
 

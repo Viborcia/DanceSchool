@@ -1,42 +1,89 @@
+
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
-    <div class="navbar-header ">
-    <a class="navbar-brand" href="#">
-    <%= image_tag 'logo2.jpg', id: 'Logo' %> Dance School
-  </a>
-  
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <%= image_tag 'logo2.jpg', id: 'Logo' %> Dance School
+      </a>
     </div>
+    
+    <% nav_links = [] %>
+    <% if current_user %>
+      <% if current_user.role == 'student' %>
+        <% nav_links = [
+          { name: 'Home', path: '/student' },
+          { name: 'Grafik', path: '/cours' , active: true},
+          { name: 'Moje Zajęcia', path: '/my_course' },
+          { name: 'Profil', path: '/student_profile' },
+          { name: 'Wyloguj', path: '/student_sign_out' }
+        ] %>
+      <% elsif current_user.role == 'teacher' %>
+        <% nav_links = [
+          { name: 'Home', path: '/teacher' },
+          { name: 'Grafik', path: '/cours', active: true },
+          { name: 'Prowadzone Zajęcia', path: '/own_course' },
+          { name: 'Profil', path: '/teacher_profile' },
+          { name: 'Wyloguj', path: '/teacher_sign_out' }
+        ] %>
+      <% end %>
+    <% else %>
+      <% nav_links = [
+        { name: 'Home', path: '/main_stage' },
+        { name: 'Logowanie', path: '/login' },
+        { name: 'Kursy', path: '/cours', active: true },
+        { name: 'Pomoc', path: '/help' },
+        { name: 'Kontakt', path: '/contact' }
+      ] %>
+    <% end %>
+
     <ul class="nav nav-pills navbar-left">
-    <li> <a href="/main_stage">Home</a></li>
-      <li><a href="/login">Logowanie</a></li>
-      <li class="active"><a href="/cours">Kursy</a></li>
-      <li><a href="/help">Pomoc</a></li>
-      <li><a href="/contact">Kontakt</a></li>
+      <% nav_links.each do |link| %>
+        <li class="<%= 'active' if link[:active] %>">
+          <a href="<%= link[:path] %>"><%= link[:name] %></a>
+        </li>
+      <% end %>
     </ul>
+
     <form class="navbar-form navbar-right" style="display: flex; align-items: center;">
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Szukaj na stronie...">
       </div>
       <button type="submit" class="btn btn-default" id="searchButton"><b> 🔎 </b></button>
     </form>
+
     <div class="navbar-right" style="display: flex; align-items: center; margin-left: 10px;">
-      <button type="button" class="btn btn-primary btn btn-default navbar-btn"><%= link_to "Zarejestruj się", new_user_registration_path, style:"color:white; text-decoration: none;" %></button>
-      <button type="button" class="btn btn-primary btn btn-default navbar-btn"><%= link_to "Zaloguj się", new_user_session_path, style:"color:white; text-decoration: none;" %></button>
+      <% if current_user %>
+        <button type="button" class="btn btn-primary navbar-btn">
+          <%= link_to "Profil", current_user.role == 'student' ? "/student_profile" : "/teacher_profile", style: "color:white; text-decoration: none;" %>
+        </button>
+        <%= button_to "Wyloguj się", destroy_user_session_path, method: :delete, class: "btn btn-primary navbar-btn", style: "color:white; text-decoration: none;" %>
+      <% else %>
+        <button type="button" class="btn btn-primary navbar-btn">
+          <%= link_to "Zarejestruj się", new_user_registration_path, style: "color:white; text-decoration: none;" %>
+        </button>
+        <button type="button" class="btn btn-primary navbar-btn">
+          <%= link_to "Zaloguj się", new_user_session_path, style: "color:white; text-decoration: none;" %>
+        </button>
+      <% end %>
     </div>
   </div>
 </nav>
 
+
 <p style="color: green"><%= notice %></p>
 
-<h1>Courses</h1>
+<h1>Kursy</h1>
 
-<div id="courses">
+<center><div  id="courses">
   <% @courses.each do |course| %>
     <%= render course %>
     <p>
-      <%= link_to "Show this course", course %>
+   <div class="actions" style="margin-top: 30px; margin-bottom: 20px;">
+      <%= link_to "Show this course", course , class: "btn btn-primary btn-lg",style:"color:white; text-decoration: none;" %>
     </p>
   <% end %>
 </div>
-
-<%= link_to "New course", new_course_path %>
+<% if current_user && current_user.role == 'teacher' %>
+<center><div class="actions" style="margin-top: 30px; margin-bottom: 20px;">
+<%= link_to "New course", new_course_path , class: "btn btn-primary btn-lg",style:"color:white; text-decoration: none;"%>
+<% end %>
