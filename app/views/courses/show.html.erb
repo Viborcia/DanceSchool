@@ -70,7 +70,6 @@
 
 <p style="color: green"><%= notice %></p>
 <h1>Kurs</h1>
-<%= render @course %>
 <% if current_user && current_user.role == 'teacher' %>
 <center><div class="actions" style="margin-top: 30px; margin-bottom: 20px;">
   <%= link_to "Edit this course", edit_course_path(@course) , class: "btn btn-primary btn-lg",style:"color:white; text-decoration: none;" %> 
@@ -78,10 +77,14 @@
   <center><div class="actions" style="margin-top: 30px; margin-bottom: 20px;">
   <%= link_to "Back to courses" , courses_path , class: "btn btn-primary btn-lg",style:"color:white; text-decoration: none;" %>
 
+<%= render @course %>
+
   <% if current_user && !@course.users.include?(current_user) %>
   <%= form_with url: course_course_registrations_path(@course), method: :post do %>
+    <% if current_user && current_user.role == 'student' %>
     <center><div class="actions" style="margin-top: 30px; margin-bottom: 20px;">
     <%= submit_tag "Enroll in this course" , class: "btn btn-primary btn-lg",style:"color:white; text-decoration: none;" %>
+  <% end %>
   <% end %>
 <% if current_user && current_user.role == 'teacher' %>
 <h2>Zapisani kursanci na kurs</h2>
@@ -101,8 +104,10 @@
       <%= link_to lesson.name, lesson_path(lesson) %> - <%= lesson.date.strftime("%B %d, %Y at %I:%M %p") %>
       <% if current_user && !lesson.users.include?(current_user) %>
         <%= form_with url: enroll_lesson_path(lesson), method: :post do %>
+          <% if current_user && current_user.role == 'student' %>
           <center><div class="actions" style="margin-top: 30px; margin-bottom: 20px;">
           <%= submit_tag "Enroll in this lesson", class: "btn btn-primary btn-lg",style:"color:white; text-decoration: none;" %>
+  <% end %>
   <% end %>
       <% else %>
         (Already enrolled)

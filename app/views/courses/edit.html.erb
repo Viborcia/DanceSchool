@@ -26,13 +26,15 @@
   </div>
 </nav>
 
-<h1>Editing course</h1>
+<h1>Edycja kursu</h1>
 
 <%= render "form", course: @course %>
 
 <br>
 
 <div>
-  <%= link_to "Show this course", @course %> |
-  <%= link_to "Back to courses", courses_path %>
+<button type="button" class="btn btn-primary navbar-btn">
+  <%= link_to "Show this course", @course , class: "btn btn-primary btn-lg",style:"color:white; text-decoration: none;"%> 
+  <button type="button" class="btn btn-primary navbar-btn">
+  <%= link_to "Back to courses", courses_path , class: "btn btn-primary btn-lg",style:"color:white; text-decoration: none;"%>
 </div>

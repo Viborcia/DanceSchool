@@ -11,51 +11,54 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
+ <div class="form-group">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control", placeholder: "Wprowadź nazwę kursu" %>
+    </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div>
-    <%= form.label :number_of_place, style: "display: block" %>
-    <%= form.number_field :number_of_place %>
-  </div>
-
-  <div>
-    <%= form.label :number_of_lessons, style: "display: block" %>
-    <%= form.number_field :number_of_lessons %>
-  </div>
-
-  <div>
-  <%= form.label :level, style: "display: block" %>
-  <%= form.number_field :level %>
-</div>
-
-  <div>
-    <%= form.label :start_date, style: "display: block" %>
-    <%= form.datetime_field :start_date %>
-  </div>
-
-  <div>
-  <%= form.label :is_pair, "Czy taniec w parze?", style: "display: block" %>
-  
-  <div>
-    <%= form.radio_button :is_pair, true %>
-    <%= form.label :is_pair_true, "Tak" %>
+    <div class="form-group">
+    <%= form.hidden_field :instructor, value: current_user.id %>
   </div>
   
-  <div>
-    <%= form.radio_button :is_pair, false %>
-    <%= form.label :is_pair_false, "Nie" %>
-  </div>
-</div>
+    <div class="form-group">
+      <%= form.label :description, class: "form-label" %>
+      <%= form.text_area :description, class: "form-control", placeholder: "Wprowadź opis kursu", rows: 3 %>
+    </div>
 
-  <div>
-    <center><%= form.submit %></center>
-  </div>
+    <div class="form-group">
+      <%= form.label :number_of_place, class: "form-label" %>
+      <%= form.number_field :number_of_place, class: "form-control", placeholder: "Ilość miejsc" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :number_of_lessons, class: "form-label" %>
+      <%= form.number_field :number_of_lessons, class: "form-control", placeholder: "Liczba lekcji" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :level, class: "form-label" %>
+      <%= form.number_field :level, class: "form-control", placeholder: "Poziom (1-10)" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :start_date, class: "form-label" %>
+      <%= form.datetime_field :start_date, class: "form-control" %>
+    </div>
+
+    <fieldset class="form-group">
+      <legend class="form-label">Czy taniec w parze?</legend>
+      <div class="form-check">
+        <%= form.radio_button :is_pair, true, class: "form-check-input" %>
+        <%= form.label :is_pair_true, "Tak", class: "form-check-label" %>
+      </div>
+      <div class="form-check">
+        <%= form.radio_button :is_pair, false, class: "form-check-input" %>
+        <%= form.label :is_pair_false, "Nie", class: "form-check-label" %>
+      </div>
+    </fieldset>
+
+    <div class="form-group">
+      <%= form.submit "Zarejestruj Kurs", class: "btn btn-primary mt-3" %>
+      <%= link_to "Anuluj", courses_path, class: "btn btn-secondary mt-3 ml-2" %>
+    </div>
 <% end %>
