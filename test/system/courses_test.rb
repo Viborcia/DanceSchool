@@ -21,7 +21,7 @@ class CoursesTest < ApplicationSystemTestCase
     click_on "Create Course"
 
     assert_text "Course was successfully created"
-    click_on "Back"
+    click_on "Wróć"
   end
 
   test "should update Course" do
@@ -35,7 +35,7 @@ class CoursesTest < ApplicationSystemTestCase
     click_on "Update Course"
 
     assert_text "Course was successfully updated"
-    click_on "Back"
+    click_on "Wróć"
   end
 
   test "should destroy Course" do
