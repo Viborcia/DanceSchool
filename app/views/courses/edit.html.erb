@@ -7,11 +7,11 @@
   
     </div>
     <ul class="nav nav-pills navbar-left">
-    <li> <a href="/main_stage">Home</a></li>
-      <li><a href="/login">Logowanie</a></li>
-      <li class="active"><a href="/cours">Kursy</a></li>
-      <li><a href="/help">Pomoc</a></li>
-      <li><a href="/contact">Kontakt</a></li>
+    <li><a href="/teacher">Home</a></li>
+      <li class="active"><a href="/cours">Grafik</a></li>
+      <li><a href="/own_course">Prowadzone Zajęcia</a></li>
+      <li><a href="/teacher_profile">Profil</a></li>
+      <li><a href="/teacher_sign_out">Wyloguj</a></li>
     </ul>
     <form class="navbar-form navbar-right" style="display: flex; align-items: center;">
       <div class="form-group">
@@ -20,8 +20,8 @@
       <button type="submit" class="btn btn-default" id="searchButton"><b> 🔎 </b></button>
     </form>
     <div class="navbar-right" style="display: flex; align-items: center; margin-left: 10px;">
-      <button type="button" class="btn btn-primary btn btn-default navbar-btn"><%= link_to "Zarejestruj się", new_user_registration_path, style:"color:white; text-decoration: none;" %></button>
-      <button type="button" class="btn btn-primary btn btn-default navbar-btn"><%= link_to "Zaloguj się", new_user_session_path, style:"color:white; text-decoration: none;" %></button>
+      <button type="button" class="btn btn-primary btn btn-default navbar-btn"><%= link_to "Profil", "/teacher_profile", style:"color:white; text-decoration: none;" %></button>
+<%= button_to "Wyloguj się", destroy_user_session_path, method: :delete, class: "btn btn-primary btn-default navbar-btn", style: "color:white; text-decoration: none;" %>
     </div>
   </div>
 </nav>

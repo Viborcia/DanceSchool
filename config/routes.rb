@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   # root "posts#index"
   root "main#main_stage"
   get 'main_stage', to: "main#main_stage", as: 'danceschool'
-  get 'login', to: "main#login", as: 'login'
+  get 'instructors', to: "main#instructors", as: 'instructors'
   get 'cours', to: "courses#index", as: 'cours'
   get 'help', to: "main#help", as: 'help'
   get 'contact', to: "main#contact", as: 'contact'
