@@ -47,9 +47,12 @@
     </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item fw-lighter" style="text-align:left;"><span style="font-weight:500">E-mail:</span> <%= current_user.email %></li>
+    <li class="list-group-item fw-lighter" style="text-align:left"><span style="font-weight:500">Numer Telefonu:</span> <%= current_user.phone_number %></b></li>
     <li class="list-group-item fw-lighter" style="text-align:left"><span style="font-weight:500">Imię:</span> <%= current_user.first_name %></b></li>
     <li class="list-group-item fw-lighter" style="text-align:left"><span style="font-weight:500">Nazwisko:</span> <%= current_user.last_name %></b></li>
     <li class="list-group-item fw-lighter" style="text-align:left"><span style="font-weight:500">Rola:</span> <%= current_user.role %></b></li>
+    <li class="list-group-item fw-lighter" style="text-align:left"><span style="font-weight:500">Płeć:</span> <%= current_user.gender == 'woman' ? 'kobieta' : 'mężczyzna' %></b></li>
+
   </ul>
 </div>
 </center>
