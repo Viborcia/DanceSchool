@@ -8,8 +8,8 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-User.create!(email: 'student@example.com', password: 'Password1', role: :student, first_name: 'Anna', last_name: 'Bąk', gender: :woman, phone_number: '756134825')
-User.create!(email: 'teacher@example.com', password: 'Password1', role: :teacher, first_name: 'Zenon', last_name: 'Kowalski', gender: :man, phone_number: '172485265')
-User.create!(email: 'admin@example.com', password: 'Password1', role: :admin, first_name: 'Renata', last_name: 'Klucz', gender: :woman, phone_number: '658864542')
-User.create!(email: 'teacher1@example.com', password: 'Password1', role: :teacher, first_name: 'Stanisław', last_name: 'Malarski', gender: :man, phone_number: '485423615')
+User.create!(email: 'student@example.com', password: 'Password1', role: :student, first_name: 'Anna', last_name: 'Bąk', gender: :woman, phone_number: '756134825', address: 'Piastowska 26/9 Wrocław')
+User.create!(email: 'teacher@example.com', password: 'Password1', role: :teacher, first_name: 'Zenon', last_name: 'Kowalski', gender: :man, phone_number: '172485265', address: 'Sienkiewicza 6/19 Wrocław')
+User.create!(email: 'admin@example.com', password: 'Password1', role: :admin, first_name: 'Renata', last_name: 'Klucz', gender: :woman, phone_number: '658864542', address: 'Kołątaja 45/1 Wrocław')
+User.create!(email: 'teacher1@example.com', password: 'Password1', role: :teacher, first_name: 'Stanisław', last_name: 'Malarski', gender: :man, phone_number: '485423615', address: 'Śliczna 6/4 Wrocław')
 

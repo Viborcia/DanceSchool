@@ -25,45 +25,108 @@
     </div>
   </div>
 </nav>
-<center><h2>Zarejestruj się</h2></center>
+<center>
+  <h2>Zarejestruj się</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+  <div class="container my-5">
+    <div class="card shadow-lg p-4 rounded-3" style="width: 800px; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="form-floating mb-3" style="margin-top: 10px; margin-bottom: 10px;">
-  <%= f.text_field :first_name, autofocus: true, required: true, class: "form-control", id: "floatingInput" %>
-  <%= f.label :first_name, "Imię", for: "floatingInput" %>
-</div>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <div class="input-group">
+              <span class="input-group-text">
+                <i class="fas fa-user fa-2x"></i>
+                <%= f.label :first_name, "Imie",style:"font-size:20px; padding-left: 10px;", for: "phone_number" %>
+              </span>
+              <%= f.text_field :first_name, autofocus: true, required: true, class: "form-control", placeholder: "Imię" %>
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <div class="input-group">
+              <span class="input-group-text">
+                <i class="fas fa-id-card fa-2x"></i>
+                <%= f.label :last_name, "Nazwisko",style:"font-size:20px; padding-left: 10px;", for: "phone_number" %>
+              </span>
+              <%= f.text_field :last_name, required: true, class: "form-control", placeholder: "Nazwisko" %>
+            </div>
+          </div>
+        </div>
 
- <div class="form-floating mb-3" style="margin-top: 10px; margin-bottom: 10px;">
-  <%= f.text_field :last_name, required: true, class: "form-control", id: "floatingInput" %>
-  <%= f.label :last_name, "Nawisko", for: "floatingInput" %>
-</div>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <div class="input-group">
+              <span class="input-group-text">
+                <i class="fas fa-envelope fa-2x"></i>
+                <%= f.label :email, "E-mail",style:"font-size:20px; padding-left: 10px;", for: "phone_number" %>
+              </span>
+              <%= f.email_field :email, required: true, class: "form-control", placeholder: "Adres e-mail" %>
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <div class="input-group">
+              <span class="input-group-text">
+                <i class="fas fa-phone fa-2x"></i>
+                <%= f.label :phone_number, "Numer telefonu",style:"font-size:20px; padding-left: 10px;", for: "phone_number" %>
+              </span>
+              <%= f.text_field :phone_number, required: true, class: "form-control", placeholder: "Numer telefonu" %>
+            </div>
+          </div>
+        </div>
 
-  <div class="form-floating mb-3" style="margin-top: 10px; margin-bottom: 10px;">
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true, class: "form-control", id: "floatingInput" %>
-    <%= f.label :email, "Adres e-mail", for: "floatingInput" %>
-  </div>
+       
+        <div class="input-group mb-3">
+          <span class="input-group-text">
+            <i class="fas fa-map-marker-alt fa-2x" ></i>
+            <%= f.label :address, "Adres zamieszkania",style:"font-size:20px; padding-left: 10px;", for: "phone_number" %>
+          </span>
+          <%= f.text_field :address, required: true, class: "form-control", placeholder: "Adres zamieszkania" %>
+        </div>
 
-  <div class="form-floating mb-3" style="margin-top: 10px; margin-bottom: 10px;">
-     <%= f.password_field :password, autocomplete: "new-password" , required: true, class: "form-control", id: "floatingInput"%>
-     <%= f.label :password, "Hasło",  for: "floatingInput" %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> minimum znaków)</em>
-    <% end %><br />
-   
-  </div>
-
-  <div class="form-floating mb-3" style="margin-top: 10px; margin-bottom: 10px;">
-   <%= f.password_field :password_confirmation, autocomplete: "new-password" , required: true, class: "form-control", id: "floatingInput"%> 
-   <%= f.label :password_confirmation , "Potwierdź Hasło",  for: "floatingInput"%><br />
     
-  </div>
+        <div class="form-group mb-3">
+          <label for="gender">Płeć</label><br>
+          <div class="form-check form-check-inline">
+            <%= f.radio_button :gender, 'kobieta', class: "form-check-input", id: "gender_female" %>
+            <label class="form-check-label" for="gender_female">Kobieta</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <%= f.radio_button :gender, 'mężczyzna', class: "form-check-input", id: "gender_male" %>
+            <label class="form-check-label" for="gender_male">Mężczyzna</label>
+          </div>
+        </div>
 
-  <center><div class="actions" style="margin-top: 30px; margin-bottom: 20px;">
-      <%= f.submit "Zarejestruj się", class: "btn btn-primary btn-lg", data: {turbo: false}, style:"color:white; text-decoration: none;" %>
-      </div></center>
-<% end %>
+   
+        <div class="input-group mb-3">
+          <span class="input-group-text">
+            <i class="fas fa-lock fa-2x"></i>
+            <%= f.label :password, "Hasło",style:"font-size:20px; padding-left: 10px;", for: "phone_number" %>
+          </span>
+          <%= f.password_field :password, required: true, class: "form-control", placeholder: "Hasło" %>
+        </div>
+
+ 
+        <div class="input-group mb-3">
+          <span class="input-group-text">
+            <i class="fas fa-lock fa-2x"></i>
+            <%= f.label :password_confirmation, "Potwierdź hasło",style:"font-size:20px; padding-left: 10px;", for: "phone_number" %>
+          </span>
+          <%= f.password_field :password_confirmation, required: true, class: "form-control", placeholder: "Potwierdź hasło" %>
+        </div>
+
+        <div class="d-grid gap-2" style="margin-top: 20px;">
+          <%= f.submit "Zarejestruj się", class: "btn btn-primary btn-lg" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</center>
+
+
+
 
 <%= render "devise/shared/links" %>
 
