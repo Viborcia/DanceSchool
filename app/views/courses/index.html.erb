@@ -14,16 +14,12 @@
           { name: 'Home', path: '/student' },
           { name: 'Grafik', path: '/cours' , active: true},
           { name: 'Moje Zajęcia', path: '/my_course' },
-          { name: 'Profil', path: '/student_profile' },
-          { name: 'Wyloguj', path: '/student_sign_out' }
         ] %>
       <% elsif current_user.role == 'teacher' %>
         <% nav_links = [
           { name: 'Home', path: '/teacher' },
           { name: 'Grafik', path: '/cours', active: true },
           { name: 'Prowadzone Zajęcia', path: '/own_course' },
-          { name: 'Profil', path: '/teacher_profile' },
-          { name: 'Wyloguj', path: '/teacher_sign_out' }
         ] %>
       <% end %>
     <% else %>
@@ -43,14 +39,6 @@
         </li>
       <% end %>
     </ul>
-
-    <form class="navbar-form navbar-right" style="display: flex; align-items: center;">
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Szukaj na stronie...">
-      </div>
-      <button type="submit" class="btn btn-default" id="searchButton"><b> 🔎 </b></button>
-    </form>
-
     <div class="navbar-right" style="display: flex; align-items: center; margin-left: 10px;">
       <% if current_user %>
         <button type="button" class="btn btn-primary navbar-btn">
@@ -72,21 +60,25 @@
 
 <p style="color: green"><%= notice %></p>
 
-<h1>Kursy</h1>
-<% if current_user && current_user.role == 'teacher' %>
-<center><div class="actions" style="margin-top: 30px; margin-bottom: 20px;">
-<%= link_to "Nowy kurs", new_course_path , class: "btn btn-primary btn-lg",style:"color:white; text-decoration: none;"%>
-<% end %>
-<center><div  id="courses">
-  <% @courses.each do |course| %>
-    <%= render course %>
-    <p>
-   <div class="actions" style="margin-top: 30px; margin-bottom: 20px;">
-      <%= link_to "Pokaż kurs", course , class: "btn btn-primary btn-lg",style:"color:white; text-decoration: none;" %>
-    </p>
+<div style="display: flex; align-items: center; justify-content: center; position: relative; margin-bottom: 20px;">
+  <h2 style="text-align: center; flex: 1;">Kursy</h2>
+  <% if current_user && current_user.role == 'teacher' %>
+    <div class="actions" style="position: relative; right: 80px;">
+    <%= link_to new_course_path, class: "btn btn-primary btn-lg", style: "color: white; text-decoration: none;", title: "Dodaj nowy kurs", data: { toggle: "tooltip" } do %>
+      <i class="fas fa-plus"></i>
+    <% end %>
+    
+    </div>
   <% end %>
 </div>
 
-<footer class="footer">
-    <p>&copy; 2024 Dance School</p>
-</footer>
+
+
+    <% @courses.each do |course| %>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+          <%= render course %>
+      </div>
+    <% end %>
+
+
+

@@ -1,47 +1,134 @@
-<h2>Edytuj Profil <%= resource_name.to_s.humanize %></h2>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <%= image_tag 'logo2.jpg', id: 'Logo' %> Dance School
+      </a>
+    </div>
+    
+    <% nav_links = [] %>
+    <% if current_user %>
+      <% if current_user.role == 'student' %>
+        <% nav_links = [
+          { name: 'Home', path: '/student' },
+          { name: 'Grafik', path: '/cours' },
+          { name: 'Moje Zajęcia', path: '/my_course' },
+      
+        ] %>
+      <% elsif current_user.role == 'teacher' %>
+        <% nav_links = [
+          { name: 'Home', path: '/teacher' },
+          { name: 'Grafik', path: '/cours' },
+          { name: 'Prowadzone Zajęcia', path: '/own_course' },
+        
+        ] %>
+      <% end %>
+<% end %>
+    <ul class="nav nav-pills navbar-left">
+      <% nav_links.each do |link| %>
+        <li class="<%= 'active' if link[:active] %>">
+          <a href="<%= link[:path] %>"><%= link[:name] %></a>
+        </li>
+      <% end %>
+    </ul>
 
+  
+
+    <div class="navbar-right" style="display: flex; align-items: center; margin-left: 10px;">  
+        <button type="button" class="btn btn-primary navbar-btn">
+          <%= link_to "Profil", current_user.role == 'student' ? "/student_profile" : "/teacher_profile", style: "color:white; text-decoration: none;" %>
+        </button>
+        <%= button_to "Wyloguj się", destroy_user_session_path, method: :delete, class: "btn btn-primary navbar-btn", style: "color:white; text-decoration: none;" %>
+    </div>
+  </div>
+</nav>
+
+<center><h2>Edytuj Swój Profil</h2>
+<div class="container my-5">
+    <div class="card shadow-lg p-4 rounded-3" style="width: 800px; transition: transform 0.3s ease, box-shadow 0.3s ease;background-color: #f0f0f5;">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="form-floating mb-3" style="margin-top: 30px; margin-bottom: 30px;">
-   <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", id: "floatingInput" %><br /> 
-   <%= f.label :email, "Adres e-mail", for: "floatingInput" %>
+ 
+  <div class="row mb-3">
+  <div class="col-md-6">
+    <div class="input-group">
+      <span class="input-group-text">
+        <i class="fas fa-envelope fa-2x"></i>
+        <%= f.label :email, "E-mail",style:"font-size:20px; padding-left: 10px;", for: "email" %>
+      </span>
+      <%= f.email_field :email, required: true, autofocus: true, autocomplete: "email",class: "form-control", placeholder: "Adres e-mail" %>
+    </div>
   </div>
+  
+  <div class="col-md-6">
+    <div class="input-group">
+      <span class="input-group-text">
+        <i class="fas fa-phone fa-2x"></i>
+        <%= f.label :phone_number, "Numer telefonu",style:"font-size:20px; padding-left: 10px;", for: "phone_number" %>
+      </span>
+      <%= f.text_field :phone_number, required: true,  autocomplete: "phone_number",class: "form-control", placeholder: "Numer telefonu" %>
+    </div>
+  </div>
+</div>
+  
+<div class="input-group mb-3">
+<span class="input-group-text">
+  <i class="fas fa-map-marker-alt fa-2x" ></i>
+  <%= f.label :address, "Adres zamieszkania",style:"font-size:20px; padding-left: 10px;", for: "phone_number" %>
+</span>
+<%= f.text_field :address, required: true,  autocomplete: "address",class: "form-control", placeholder: "Adres zamieszkania" %>
+</div>
+
+<% tooltip_text = "Jeżeli nie chcesz zmieniać hasła, pozostaw pole puste. Minimalna długość: #{@minimum_password_length} znaków" %>
+<div class="input-group mb-3">
+  <span class="input-group-text" 
+        data-toggle="tooltip" 
+        data-placement="bottom" 
+        title="<%= tooltip_text %>" 
+        style="position: relative;">
+    <i class="fas fa-lock fa-2x"></i>
+    <%= f.label :password, "Hasło", style: "font-size:20px; padding-left: 10px;", for: "password" %>
+    <div class="custom-tooltip" style="position: absolute; transform: translate3d(-170px, -50px, 0px);">
+
+      <%= tooltip_text %>
+    </div>
+  </span>
+  <%= f.password_field :password, class: "form-control", placeholder: "Hasło" %>
+</div>
+
+<div class="input-group mb-3">
+<span class="input-group-text">
+  <i class="fas fa-lock fa-2x"></i>
+  <%= f.label :password_confirmation, "Potwierdź hasło",style:"font-size:20px; padding-left: 10px;", for: "phone_number" %>
+</span>
+<%= f.password_field :password_confirmation, required: true, class: "form-control", placeholder: "Potwierdź hasło" %>
+</div>
+
+<div class="input-group mb-3">
+<span class="input-group-text">
+  <i class="fas fa-lock fa-2x"></i>
+  <%= f.label :current_password, "Obecne hasło",style:"font-size:20px; padding-left: 10px;", for: "current_password" %>
+</span>
+<%= f.password_field :current_password, required: true, class: "form-control", placeholder: "Obecne hasło" %>
+</div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
-<i>(Jeżeli nie chcesz zmieniać hasło to pozostaw puste)</i><br />
-  <div class="form-floating mb-3" style="margin-top: 30px; margin-bottom: 30px;">
-  
-  <%= f.password_field :password, autocomplete: "new-password", class: "form-control", id: "floatingInput" %> 
-    <%= f.label :password ,"Hasło", for: "floatingInput"%> 
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> minimum znaków</em>
-    <% end %>
-  </div>
-
-  <div class="form-floating mb-3" style="margin-top: 30px; margin-bottom: 30px;">
-     <%= f.password_field :password_confirmation, autocomplete: "new-password" , class: "form-control", id: "floatingInput"%>
-     <%= f.label :password_confirmation ,"Potwierdź Hasło", for: "floatingInput"%><br />
-  </div>
-
-  <div class="form-floating mb-3" style="margin-top: 30px; margin-bottom: 30px;">
-     <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control", id: "floatingInput" %>
-     <%= f.label :current_password , "Obecne Hasło", for: "floatingInput"%> <br />
-  </div>
 
   <div class="actions" style="margin-top: 30px; margin-bottom: 20px;">
-    <center><%= f.submit "Zaaktualizuj zmiany" , class: "btn btn-primary btn-lg",style:"color:white; text-decoration: none;"%></center>
+   <%= f.submit "Zaaktualizuj zmiany" , class: "btn btn-primary btn-lg",style:"color:white; text-decoration: none;"%>
   </div>
 <% end %>
+ <% if current_user.role == 'admin' %>
+<h3>Usuń moje konto</h3>
+<div><%= button_to "Usuń moje konto", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete , class: "btn btn-primary btn-lg",style:"color:white; text-decoration: none;"%></div>
+<%end %>
 
-<center><h3>Usuń moje konto</h3></center>
-
-<center><div><%= button_to "Usuń moje konto", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete , class: "btn btn-primary btn-lg",style:"color:white; text-decoration: none;"%></div></center>
-
-<center><%= link_to "Wróć", :back , class: "btn btn-primary btn-lg",style:"color:white; text-decoration: none;"%></center>
+<%= link_to "Wróć", :back , class: "btn btn-primary btn-lg",style:"color:white; text-decoration: none;"%>
+</center>
+</div>
+</div>
 
 <footer class="footer">
     <p>&copy; 2024 Dance School</p>

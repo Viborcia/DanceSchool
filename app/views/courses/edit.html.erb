@@ -26,12 +26,7 @@
   </div>
 </nav>
 
-<h1>Edycja kursu</h1>
-
-<%= render "form", course: @course %>
-
-<br>
-
+<center><h2>Edycja kursu</h2>
 <div>
 <button type="button" class="btn btn-primary navbar-btn">
   <%= link_to "Pokaż kurs", @course , class: "btn btn-primary btn-lg",style:"color:white; text-decoration: none;"%> 
@@ -39,6 +34,12 @@
   <%= link_to "Wróć do kursów", courses_path , class: "btn btn-primary btn-lg",style:"color:white; text-decoration: none;"%>
 </div>
 
-<footer class="footer">
-    <p>&copy; 2024 Dance School</p>
-</footer>
+<div class="container my-5">
+    <div class="card shadow-lg p-4 rounded-3" style="width: 800px; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+<%= render "form", course: @course %>
+</div>
+</div>
+</center>
+<br>
+
+

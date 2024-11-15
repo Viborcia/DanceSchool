@@ -16,6 +16,8 @@ class StudentController < ApplicationController
   Rails.logger.debug "Current user: #{current_user.inspect}"
   Rails.logger.debug "Courses: #{@courses.inspect}"
 end
+
+
     
     private
     

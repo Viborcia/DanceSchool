@@ -11,15 +11,8 @@
     <li class="active"><a href="/teacher">Home</a></li>
       <li><a href="/cours">Grafik</a></li>
       <li><a href="/own_course">Prowadzone Zajęcia</a></li>
-      <li><a href="/teacher_profile">Profil</a></li>
-      <li><a href="/teacher_sign_out">Wyloguj</a></li>
+
     </ul>
-    <form class="navbar-form navbar-right" style="display: flex; align-items: center;">
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Szukaj na stronie...">
-      </div>
-      <button type="submit" class="btn btn-default" id="searchButton"><b> 🔎 </b></button>
-    </form>
     <div class="navbar-right" style="display: flex; align-items: center; margin-left: 10px;">
       <button type="button" class="btn btn-primary btn btn-default navbar-btn"><%= link_to "Profil", "/teacher_profile", style:"color:white; text-decoration: none;" %></button>
 <%= button_to "Wyloguj się", destroy_user_session_path, method: :delete, class: "btn btn-primary btn-default navbar-btn", style: "color:white; text-decoration: none;" %>
