@@ -1,3 +1,5 @@
+<%= javascript_include_tag "courses" %>
+
 <%= form_with(model: course) do |form| %>
   <% if course.errors.any? %>
     <div style="color: red">
@@ -25,6 +27,8 @@
     </div>
     </div>
     </div>
+
+    <%= form.hidden_field :weekday, id: "course_weekday" %>
 
     <div class="form-group">
     <%= form.hidden_field :instructor, value: current_user.id %>

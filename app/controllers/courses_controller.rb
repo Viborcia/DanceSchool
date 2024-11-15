@@ -22,6 +22,7 @@ class CoursesController < ApplicationController
 
   # POST /courses or /courses.json
   def create
+    course_params[:weekday] = course_params[:weekday].to_i if course_params[:weekday].present?
     @course = Course.new(course_params)
 
     respond_to do |format|
@@ -79,6 +80,6 @@ class CoursesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def course_params
-      params.require(:course).permit(:name, :instructor, :description, :number_of_place, :number_of_lessons, :level, :start_date, :is_pair)
+      params.require(:course).permit(:name, :instructor, :description, :number_of_place, :number_of_lessons, :level, :start_date, :is_pair, :weekday)
     end
 end

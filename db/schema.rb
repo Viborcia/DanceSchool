@@ -17,6 +17,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_02_075350) do
     t.text "description"
     t.integer "number_of_place"
     t.string "level"
+    t.integer "weekday", default: 0
     t.integer "number_of_lessons"
     t.boolean "is_pair", null: false
     t.datetime "start_date"
@@ -52,6 +53,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_02_075350) do
     t.string "email", default: "", null: false
     t.string "first_name"
     t.string "last_name"
+    t.string "description", default: "", null: false 
     t.integer "gender"
     t.string "phone_number"
     t.string "address"
