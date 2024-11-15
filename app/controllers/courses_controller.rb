@@ -59,6 +59,18 @@ class CoursesController < ApplicationController
   end
 
 
+  def unenroll
+    course = Course.find(params[:id])
+    if course.users.include?(current_user)
+      course.users.delete(current_user)
+      flash[:notice] = "Wypisałeś się z kursu."
+    else
+      flash[:alert] = "Nie jesteś zapisany na ten kurs."
+    end
+    redirect_to courses_path
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_course

@@ -19,6 +19,17 @@ class LessonsController < ApplicationController
     redirect_to course_path(@lesson.course)
   end
 
+  def unenroll
+    lesson = Lesson.find(params[:id])
+    if lesson.users.include?(current_user)
+      lesson.users.delete(current_user)
+      flash[:notice] = "Wypisałeś się z lekcji."
+    else
+      flash[:alert] = "Nie jesteś zapisany na tę lekcję."
+    end
+    redirect_to course_path(lesson.course)
+  end
+
   private
 
   # Ustawienie instancji lekcji na podstawie przekazanego ID

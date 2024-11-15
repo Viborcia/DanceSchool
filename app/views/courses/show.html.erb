@@ -132,7 +132,13 @@
   <% end %>
   <% end %>
       <% else %>
-        (Jesteś zapisany)
+      <% if current_user && lesson.users.include?(current_user) %>
+      <%= form_with url: unenroll_lesson_path(lesson), method: :post do %>
+        <div class="actions" style="margin-top: 30px; margin-bottom: 20px;">
+          <%= submit_tag "Wypisz się z lekcji", class: "btn btn-danger btn-lg", style: "color:white; text-decoration: none;" %>
+        </div>
+      <% end %>
+    <% end %>
       <% end %>
     </li>
   <% end %>
@@ -142,6 +148,12 @@
 
 <% elsif current_user && @course.users.include?(current_user) %>
   <p>Jesteś zapisany na kurs.</p>
+  <%= form_with url: unenroll_course_path(@course), method: :post do %>
+    <div class="actions" style="margin-top: 30px; margin-bottom: 20px;">
+      <%= submit_tag "Wypisz się z kursu", class: "btn btn-danger btn-lg", style: "color:white; text-decoration: none;" %>
+    </div>
+  <% end %>
+
 <% else %>
   <p>Zaloguj się, aby zapisać się na kurs.</p>
 <% end %>

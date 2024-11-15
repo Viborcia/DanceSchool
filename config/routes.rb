@@ -3,10 +3,16 @@ Rails.application.routes.draw do
   resources :lessons, only: [:show] do
     post 'enroll', on: :member
   end
+  resources :lessons, only: [:show] do
+    post 'unenroll', on: :member
+  end
   resources :courses do
     resources :course_registrations, only: [:create]
   end
-
+  resources :courses do
+    post 'unenroll', on: :member
+  end
+  
   #get 'student/home'
   devise_for :users, controllers: {  registrations: 'registrations' }
 
