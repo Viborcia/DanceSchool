@@ -4,12 +4,17 @@ class CoursesController < ApplicationController
 
   # GET /courses or /courses.json
   def index
-    @courses = Course.all
+        @courses = Course.all.includes(:instructor)
   end
-
+ 
   # GET /courses/1 or /courses/1.json
   def show
+    @course = Course.find(params[:id])
+    @instructor = @course.instructor
+    Rails.logger.debug "Course: #{@course.inspect}"
+    Rails.logger.debug "Instructor: #{@instructor.inspect}"
   end
+  
 
   # GET /courses/new
   def new
@@ -70,6 +75,7 @@ class CoursesController < ApplicationController
     end
     redirect_to courses_path
   end
+
 
 
   private

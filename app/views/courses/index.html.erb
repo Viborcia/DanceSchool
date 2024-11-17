@@ -63,22 +63,42 @@
 <div style="display: flex; align-items: center; justify-content: center; position: relative; margin-bottom: 20px;">
   <h2 style="text-align: center; flex: 1;">Kursy</h2>
   <% if current_user && current_user.role == 'teacher' %>
-    <div class="actions" style="position: relative; right: 80px;">
-    <%= link_to new_course_path, class: "btn btn-primary btn-lg", style: "color: white; text-decoration: none;", title: "Dodaj nowy kurs", data: { toggle: "tooltip" } do %>
+  <div class="actions" style="position: relative; right: 80px;">
+    <%= link_to new_course_path, class: "btn btn-primary btn-lg", style: "color: white; text-decoration: none;", data: { bs_toggle: "tooltip" }, title: "Dodaj nowy kurs" do %>
       <i class="fas fa-plus"></i>
     <% end %>
-    
-    </div>
-  <% end %>
+  </div>
+<% end %>
 </div>
 
 
+<% days_of_week = {
+  1 => "Kursy w poniedziałek",
+  2 => "Kursy we wtorek",
+  3 => "Kursy w środę",
+  4 => "Kursy w czwartek",
+  5 => "Kursy w piątek",
+  6 => "Kursy w sobotę",
+  0 => "Kursy w niedzielę"
+} %>
 
-    <% @courses.each do |course| %>
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-          <%= render course %>
-      </div>
-    <% end %>
+<% @courses.order(:weekday).group_by(&:weekday).each do |weekday, courses| %>
+  <% if days_of_week[weekday] %>  
+    <center><div class="day-header" style="background-color: #f8f9fa; padding: 10px; margin-top: 20px; border: 1px solid #ddd;">
+      <h3 style="margin: 0; color: #333;"><%= days_of_week[weekday] %></h3>
+    </div></center>
+    <div class="row">
+      <% courses.each do |course| %>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+  <%= render partial: 'course', locals: { course: course } %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+
+
+ 
 
 
 

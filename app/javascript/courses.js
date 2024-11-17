@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
       startDateField.addEventListener("change", function () {
         const date = new Date(startDateField.value);
         if (!isNaN(date)) {
-          weekdayField.value = date.getDay(); // Ustaw dzień tygodnia (0 = niedziela, 1 = poniedziałek, itd.)
+          weekdayField.value = date.getDay(); 
         }
       });
     }

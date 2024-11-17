@@ -160,56 +160,54 @@ body {
 
 
 .tooltip-inner {
-    background-color: #6a0dad !important;
-    color: pink;
-    font-size: 14px;
+    background-color: #6a0dad !important; 
+    color: pink !important;
+    font-size: 14px; 
     padding: 8px;
-    border-radius: 4px;
+    border-radius: 4px; 
 }
 
 .tooltip.bs-tooltip-top .tooltip-arrow::before {
-    border-top-color: #6a0dad !important;
+    border-top-color: #6a0dad !important; 
 }
 
-.custom-tooltip {
-    position: relative;
-    top: -35px !important; 
-    left: -555px !important; 
-    width: 200px;
-    padding: 5px;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    border-radius: 5px;
-    font-size: 12px;
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-  }
-  .custom-position-tooltip {
-    position: absolute;
-    transform: translate3d(454px, 383px, 0px) !important;
+.tooltip-custom + .tooltip.bs-tooltip-bottom {
+    position: absolute !important;
+    transform: translate3d(400px, 280px, 0px) !important;
     top: -50px !important;
     left: -170px !important;
-    will-change: transform;
-    z-index: 1000; 
+    will-change: transform !important;
+    z-index: 1000 !important;
 }
-<script>
-$(function () {
- $('[data-toggle="tooltip"]').tooltip();
-});
 
-</script>
+
+.tooltip.bs-tooltip-bottom .tooltip-arrow {
+  margin-top: 1000px !important; 
+}
+
 </style>
 
 </head>
 
   <body>
     <%= yield %>
-  <script>
-  $(document).ready(function() {
-    $('[data-toggle="tooltip"]').tooltip();
+ <script>
+ document.addEventListener('DOMContentLoaded', () => {
+  const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]:not(.tooltip-custom)'));
+  tooltipTriggerList.forEach((tooltipTriggerEl) => {
+    new bootstrap.Tooltip(tooltipTriggerEl);
   });
+});
+ </script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const specificTooltip = document.querySelector('.tooltip-custom');
+    new bootstrap.Tooltip(specificTooltip, {
+        placement: 'bottom',
+        fallbackPlacements: []
+
+  });
+});
 </script>
     <style>
     

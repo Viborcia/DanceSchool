@@ -81,20 +81,19 @@
 
 <% tooltip_text = "Jeżeli nie chcesz zmieniać hasła, pozostaw pole puste. Minimalna długość: #{@minimum_password_length} znaków" %>
 <div class="input-group mb-3">
-  <span class="input-group-text" 
-        data-toggle="tooltip" 
-        data-placement="bottom" 
-        title="<%= tooltip_text %>" 
-        style="position: relative;">
+  <span class="input-group-text tooltip-custom" 
+        data-bs-toggle="tooltip" 
+        data-bs-placement="top" 
+        title="<%= tooltip_text %>">
     <i class="fas fa-lock fa-2x"></i>
     <%= f.label :password, "Hasło", style: "font-size:20px; padding-left: 10px;", for: "password" %>
-    <div class="custom-tooltip" style="position: absolute; transform: translate3d(-170px, -50px, 0px);">
-
-      <%= tooltip_text %>
-    </div>
   </span>
   <%= f.password_field :password, class: "form-control", placeholder: "Hasło" %>
 </div>
+
+
+
+
 
 <div class="input-group mb-3">
 <span class="input-group-text">

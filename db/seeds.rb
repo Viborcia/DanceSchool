@@ -63,21 +63,22 @@ course_descriptions = [
 
 instructor_ids = (21..30).to_a
 
-start_date = DateTime.new(2024, 11, 20, 18, 0) 
+start_date = DateTime.new(2024, 11, 20, 18, 0)
 
 course_names.each_with_index do |name, index|
-  course_start_date = start_date + index.weeks
+  day_offset = index % 7 
+  course_start_date = start_date + index.weeks + day_offset.days
+  weekday = course_start_date.wday
 
   course = Course.create!(
     name: name,
     start_date: course_start_date,
-    instructor: instructor_ids[index % instructor_ids.size],
-    is_pair: [true, false].sample, 
-    number_of_place: 10 + index, 
-    number_of_lessons: rand(10..20), 
-    level: rand(1..3), 
+    instructor_id: instructor_ids[index % instructor_ids.size],
+    is_pair: [true, false].sample,
+    number_of_place: 10 + index,
+    number_of_lessons: rand(10..20),
+    level: rand(1..3),
+    weekday: weekday,
     description: course_descriptions[index]
   )
-
-  
 end
