@@ -43,12 +43,6 @@
       <% end %>
     </ul>
 
-    <form class="navbar-form navbar-right" style="display: flex; align-items: center;">
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Szukaj na stronie...">
-      </div>
-      <button type="submit" class="btn btn-default" id="searchButton"><b> 🔎 </b></button>
-    </form>
 
     <div class="navbar-right" style="display: flex; align-items: center; margin-left: 10px;">
       <% if current_user %>
@@ -69,17 +63,33 @@
 </nav>
 
 <p style="color: green"><%= notice %></p>
-<h1>Kurs</h1>
-<% if current_user && current_user.role == 'teacher' %>
-<center><div class="actions" style="margin-top: 30px; margin-bottom: 20px;">
-  <%= link_to "Edytuj kurs", edit_course_path(@course) , class: "btn btn-primary btn-lg",style:"color:white; text-decoration: none;" %> 
+<center><h2>Kurs</h2></center>
+<div class="d-flex justify-content-end" style="margin-right: 30px;margin-top: -50px; margin-bottom: 20px;">
+  <%= link_to courses_path, 
+              class: "btn btn-primary btn-lg me-2", 
+              style: "color: white; text-decoration: none;" do%>
+    <i class="fa-regular fa-circle-left"></i> Wróć
   <% end %>
-  <center><div class="actions" style="margin-top: 30px; margin-bottom: 20px;">
-  <%= link_to "Wróć do kursów" , courses_path , class: "btn btn-primary btn-lg",style:"color:white; text-decoration: none;" %>
+  
+  <% if current_user && current_user.role == 'teacher' %>
+    <%= link_to edit_course_path(@course), 
+                class: "btn btn-warning btn-lg me-2", 
+                style: "color: white; text-decoration: none;" do%>
+      <i class="fa-regular fa-pen-to-square"></i> Edytuj
+    <% end %>
 
-<%= render @course %>
+    <%= button_to @course, 
+                  method: :delete, 
+                  class: "btn btn-danger btn-lg", 
+                  style: "color: white; text-decoration: none;" do %>
+      <i class="fa-regular fa-trash-can"></i> Usuń
+    <% end %>
+  <% end %>
+</div>
 
-  <% if current_user && !@course.users.include?(current_user) %>
+<%= render 'course_detail', course: @course %>
+
+  <center><% if current_user && !@course.users.include?(current_user) %>
   <%= form_with url: course_course_registrations_path(@course), method: :post do %>
     <% if current_user && current_user.role == 'student' %>
     <center><div class="actions" style="margin-top: 30px; margin-bottom: 20px;">
@@ -88,7 +98,8 @@
   <% end %>
 <% if current_user && current_user.role == 'teacher' %>
 <h2 class="text-primary">Zapisani kursanci</h2>
-<table class="table table-striped table-pink">
+<table class="table table-striped table-pink" style="min-height: 50px; max-width: 1200px;">
+
   <thead class="bg-pink text-white">
     <tr>
       <th>Imię</th>
@@ -117,8 +128,8 @@
 
 <% end %>
 
-
 <h2>Poszczególne lekcje dla <%= @course.name %></h2>
+</center>
 
 
   <% @course.lessons.each do |lesson| %>
@@ -145,11 +156,7 @@
 <% else %>
   <p>Zaloguj się, aby zapisać się na kurs.</p>
 <% end %>
-<% if current_user && current_user.role == 'teacher' %>
-<center><div class="actions" style="margin-top: 30px; margin-bottom: 20px;">
-  <%= button_to "Usuń kurs" , @course, method: :delete  , class: "btn btn-primary btn-lg",style:"color:white; text-decoration: none;"%>
-  <% end %>
-  </div>
+
 
   
 
