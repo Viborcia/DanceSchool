@@ -120,29 +120,17 @@
 
 <h2>Poszczególne lekcje dla <%= @course.name %></h2>
 
-<ul>
+
   <% @course.lessons.each do |lesson| %>
-    <li>
-      <%= link_to lesson.name, lesson_path(lesson) %> - <%= lesson.date.strftime("%B %d, %Y at %I:%M %p") %>
-      <% if current_user && !lesson.users.include?(current_user) %>
-        <%= form_with url: enroll_lesson_path(lesson), method: :post do %>
-          <% if current_user && current_user.role == 'student' %>
-          <center><div class="actions" style="margin-top: 30px; margin-bottom: 20px;">
-          <%= submit_tag "Zapisz się na lekcje", class: "btn btn-primary btn-lg",style:"color:white; text-decoration: none;" %>
-  <% end %>
-  <% end %>
-      <% else %>
-      <% if current_user && lesson.users.include?(current_user) %>
-      <%= form_with url: unenroll_lesson_path(lesson), method: :post do %>
-        <div class="actions" style="margin-top: 30px; margin-bottom: 20px;">
-          <%= submit_tag "Wypisz się z lekcji", class: "btn btn-danger btn-lg", style: "color:white; text-decoration: none;" %>
+   
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+
+<%= render lesson %>
         </div>
-      <% end %>
-    <% end %>
-      <% end %>
-    </li>
+
+ 
   <% end %>
-</ul>
+
 
 <div>
 
