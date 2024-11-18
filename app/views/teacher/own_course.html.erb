@@ -11,8 +11,6 @@
     <li><a href="/teacher">Home</a></li>
       <li><a href="/cours">Grafik</a></li>
       <li class="active"><a href="/own_course">Prowadzone Zajęcia</a></li>
-      <li><a href="/teacher_profile">Profil</a></li>
-      <li><a href="/teacher_sign_out">Wyloguj</a></li>
     </ul>
     
     <div class="navbar-right" style="display: flex; align-items: center; margin-left: 10px;">
@@ -25,60 +23,16 @@
 
 </div>
 
-<h1>Moje kursy</h1>
+<center><h2>Moje Prowadzone kursy</h2></center>
 
 <center><% if @courses.present? && @courses.any? %>
-  <ul>
-    <% @courses.each do |course| %>
-      <style>
-  .course-card {
-    background-color: #ffe4e1; /* Jasnoróżowe tło */
-    border: 1px solid #ff69b4; /* Różowa ramka */
-  }
-  .course-card-header {
-    background-color: #ff69b4; /* Intensywny róż w nagłówku */
-    color: white; /* Biały tekst */
-  }
-  .course-card-title {
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-  }
-  .course-card-text {
-    margin-bottom: 1rem; /* Odstęp między tekstami */
-  }
-</style>
-<div class="container my-4">
-  <div id="<%= dom_id course %>" class="card course-card">
-    <div class="card-header course-card-header">
-      <h5 class="mb-0">
-        <%= course.name %>
-      </h5>
-    </div>
-    <div class="card-body">
-      <h6 class="course-card-title"><strong>Opis:</strong></h6>
-      <p class="course-card-text">
-        <%= course.description %>
-      </p>
-
-      <h6 class="course-card-title"><strong>Liczba miejsc:</strong></h6>
-      <p class="course-card-text">
-        <%= course.number_of_place %>
-      </p>
-
-      <h6 class="course-card-title"><strong>Poziom:</strong></h6>
-      <p class="course-card-text">
-        <%= course.level %>
-      </p>
-
-      <h6 class="course-card-title"><strong>Data rozpoczęcia:</strong></h6>
-      <p class="course-card-text">
-        <%= course.start_date %>
-      </p>
-    </div>
-  </div>      <div class="actions" style="margin-top: 30px; margin-bottom: 20px;">
-      <%= link_to "Pokaż kurs", course, class: "btn btn-primary btn-lg",style:"color:white; text-decoration: none;" %>
-    <% end %>
-  </ul>
+<div class="row">
+  <% @courses.each do |course| %>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+  <%= render  course%>
+        </div>
+         <% end %>
+         </div>
 <% else %>
   <p>Brak kursów do wyświetlenia.</p>
 <% end %>

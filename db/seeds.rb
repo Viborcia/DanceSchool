@@ -45,7 +45,7 @@ course_names = [
   "Taniec użytkowy", "Taniec towarzyski", "Zumba", 
   "Hip-hop", "Balet dla dorosłych", "Salsa", 
   "Tango", "Tańce latynoamerykańskie", "Modern Jazz", 
-  "Tańce klasyczne"
+  "Tańce klasyczne", "Walc angielski", "Walc wiedeński", "Hustle", "Salsa Solo", "Capoeira"
 ]
 
 course_descriptions = [
