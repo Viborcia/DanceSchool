@@ -23,12 +23,6 @@
       <li><a href="/student_profile">Profil</a></li>
       <li><a href="/student_sign_out">Wyloguj</a></li>
     </ul>
-    <form class="navbar-form navbar-right" style="display: flex; align-items: center;">
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Szukaj na stronie...">
-      </div>
-      <button type="submit" class="btn btn-default" id="searchButton"><b> 🔎 </b></button>
-    </form>
     <div class="navbar-right" style="display: flex; align-items: center; margin-left: 10px;">
       <button type="button" class="btn btn-primary btn btn-default navbar-btn"><%= link_to "Profil", "/student_profile", style:"color:white; text-decoration: none;" %></button>
 <%= button_to "Wyloguj się", destroy_user_session_path, method: :delete, class: "btn btn-primary btn-default navbar-btn", style: "color:white; text-decoration: none;" %>
@@ -39,18 +33,17 @@
 
 </div>
 
-<center><h2>Moje kursy</h2>
-<% if @courses.present? && @courses.any? %>
+<center><h2>Moje lekcje</h2>
+<% if @lessons.present? && @lessons.any? %>
       <div class="row">
- <% @courses.each do |course| %>
-    <div class="col-12 col-lg-6 ">
-  <%= render 'courses/course_detail', course: course %>
+ <% @lessons.each do |lesson| %>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+  <%= render 'lessons/my_lesson', lesson: lesson %>
    </div>
 <% end %>
       </div>
-
 <% else %>
-  <h2>Nie jesteś zapisany na żadne kursy.</h2>
+  <h2>Nie jesteś zapisany na żadne lekcje.</h2>
 <% end %>
 </center>
 

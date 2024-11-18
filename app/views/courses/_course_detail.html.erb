@@ -1,4 +1,4 @@
-<div class="container my-4" style="max-width: 900px; margin: 0 auto; padding-left: 30px; padding-right: 30px;">
+<div class="container my-4" style="max-width: 850px; margin: 0 auto; padding-left: 30px; padding-right: 30px;">
   <div class="row">
     <div class="col-md-3 col-sm-6 mb-4" id="<%= dom_id course %>">
       <div class="card course-card" style="min-height: 400px; min-width: 700px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);">
@@ -42,11 +42,12 @@
               <i class="fas fa-user" data-bs-toggle="tooltip" title="Rodzaj tańca"></i>
               <%= course.is_pair == 0 ? "Taniec w parze" : "Taniec solo" %>
             </p>
+            <% if current_user && current_user.role == 'teacher' %>
             <p>
               <i class="fas fa-id-badge" data-bs-toggle="tooltip" title="Liczba miejsc"></i>
               <%= course.number_of_place %>
             </p>
-      
+      <% end %>
           </div>
           <div class="course-details pr-4" style="flex-shrink: 0; margin-left: 20px; text-align: left;">
             <% image_name = "#{course.name.parameterize}.jpg" %>
@@ -54,16 +55,15 @@
             <% image_to_display = File.exist?(image_path) ? image_name : "dance.jpg" %>
             <%= image_tag(image_to_display, alt: "Obrazek związany z kursem", class: "img-fluid", style: "max-width: 150px; height: auto;") %>
             <p>
-            <% if current_user && !@course.users.include?(current_user) %>
+<% if current_user && !course.users.include?(current_user) %>
   <%= form_with url: course_course_registrations_path(@course), method: :post do %>
     <% if current_user && current_user.role == 'student' %>
    <div class="actions" style="margin-top: 30px; margin-bottom: 20px;">
     <%= submit_tag "Zapisz się na kurs" , class: "btn btn-primary btn-lg",style:"color:white; text-decoration: none;" %>
   <% end %>
   <% end %>
-  <% elsif current_user && @course.users.include?(current_user) %>
-  <p>Jesteś zapisany na kurs.</p>
-  <%= form_with url: unenroll_course_path(@course), method: :post do %>
+  <% elsif current_user && course.users.include?(current_user) %>
+  <%= form_with url: unenroll_course_path(course), method: :post do %>
     <div class="actions" style="margin-top: 30px; margin-bottom: 20px;">
       <%= submit_tag "Wypisz się z kursu", class: "btn btn-danger btn-lg", style: "color:white; text-decoration: none;" %>
     </div>

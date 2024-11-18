@@ -12,11 +12,16 @@ class StudentController < ApplicationController
     end
 
    def my_course
-  @courses = current_user.courses
-  Rails.logger.debug "Current user: #{current_user.inspect}"
-  Rails.logger.debug "Courses: #{@courses.inspect}"
+    @courses = current_user.enrolled_courses
+    Rails.logger.debug "Current user: #{current_user.inspect}"
+    Rails.logger.debug "Courses: #{@courses.inspect}"
 end
 
+def my_lesson
+  @lessons = current_user.lessons
+  Rails.logger.debug "Current user: #{current_user.inspect}"
+  Rails.logger.debug "Lessons: #{@lessons.inspect}"
+end
 
     
     private
