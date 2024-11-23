@@ -23,7 +23,7 @@
   <h2>Zarejestruj się</h2>
 
   <div class="container my-5">
-    <div class="card shadow-lg p-4 rounded-3" style="width: 800px; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+    <div class="card shadow-lg p-4 rounded-3" style="width: 800px; transition: transform 0.3s ease, box-shadow 0.3s ease;background-color: #f0f0f5;">
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
 
@@ -84,11 +84,11 @@
         <div class="form-group mb-3">
           <label for="gender">Płeć</label><br>
           <div class="form-check form-check-inline">
-            <%= f.radio_button :gender, 'kobieta', class: "form-check-input", id: "gender_female" %>
+            <%= f.radio_button :gender, 'woman', class: "form-check-input", id: "gender_female" %>
             <label class="form-check-label" for="gender_female">Kobieta</label>
           </div>
           <div class="form-check form-check-inline">
-            <%= f.radio_button :gender, 'mężczyzna', class: "form-check-input", id: "gender_male" %>
+            <%= f.radio_button :gender, 'man', class: "form-check-input", id: "gender_male" %>
             <label class="form-check-label" for="gender_male">Mężczyzna</label>
           </div>
         </div>
@@ -124,6 +124,3 @@
 
 <%= render "devise/shared/links" %>
 
-<footer class="footer">
-    <p>&copy; 2024 Dance School</p>
-</footer>

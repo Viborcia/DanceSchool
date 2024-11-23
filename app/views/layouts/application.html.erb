@@ -21,6 +21,44 @@
 
 
 <style>
+
+.flash-messages {
+  position: fixed;
+  top: 3px;
+  right: 50px;
+  margin-top:40px;
+  z-index: 1000;
+  width: 300px;
+  padding: 20px;
+  text-align: center;
+  visibility: visible; /* Ustawienie widoczności na początku */
+  opacity: 1; /* Ustawienie pełnej przejrzystości na początku */
+  animation: fadeOut 3s forwards; /* Dodaj animację fadeOut z czasem trwania 3 sekund */
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; } /* Początkowa wartość przezroczystości */
+  90% { opacity: 1; } /* Utrzymaj pełną przejrzystość do 90% animacji */
+  100% { opacity: 0; visibility: hidden; } /* Końcowa wartość przezroczystości i ukrycie elementu */
+}
+
+  .flash-message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  .flash-success {
+    background-color: #28a745; /* zielony */
+    color: #fff;
+  }
+
+  .flash-error {
+    background-color: #dc3545; /* czerwony */
+    color: #fff;
+  }
+
 body { background-color:#bfeaff;
 font-family: 'Merriweather', serif;
 }
@@ -36,7 +74,7 @@ h2 {
             width: 100%;
             height: 60px; 
             line-height: 60px; 
-            background-color: #66d3fa;
+            background-color: #bfeaff;
           }
 img#Logo{
 height:200%;
@@ -102,6 +140,47 @@ display: block !important;
   margin-left:17px !important;
 }
 
+.nav-item {
+  position: relative; 
+}
+
+.nav-item .nav-link {
+  padding: 15px 25px; /* Zwiększa przestrzeń wewnątrz przycisku */
+  line-height: 1.3; /* Ustawia proporcje wysokości */
+  border-radius: 10px; /* Zaokrąglenie przycisku */
+}
+
+
+.dropdown-menu {
+  background-color:  #a970d4 !important; /* Tło takie jak inne pilsy */
+  color: #ffeb3b !important;
+  position: absolute; 
+  width: 100%; /* Szerokość taka sama jak rodzica */
+  background-color: #3b77ba; /* Kolor jak aktywny przycisk */
+  border-radius: 10px; /* Zaokrąglone rogi */
+  padding: 10; /* Usuń marginesy */
+  border: ; /* Usuń obramowanie */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Delikatny cień */
+}
+
+.dropdown-item {
+  background-color:  #a970d4 !important; /* Tło takie jak inne pilsy */
+  color: #ffeb3b !important;
+  width: 40 px;
+  color: #ffffff; /* Tekst biały */
+  padding: 15px 20px; /* Dostosowanie przestrzeni */
+}
+
+
+.nav-item .nav-link {
+  background-color:  #a970d4 !important; /* Tło takie jak inne pilsy */
+  color: #ffeb3b !important; /* Kolor tekstu jak w innych przyciskach */
+  padding: 10px 15px; /* Dopasowanie rozmiaru do innych pilsów */
+  border-radius: 10px; /* Zaokrąglenie */
+  transition: all 0.3s ease; /* Łagodna animacja zmiany stylu */
+}
+
+
 a{
   color: #ffeb3b;    
 }
@@ -154,11 +233,12 @@ a{
 .lesson-card {
     width: 100%;
 }
-
-body {
-  width: 100vw;
-  height: 120vh;
+    
+i {
+  cursor: pointer;
 }
+
+
 
 
 .tooltip-inner {
@@ -192,6 +272,53 @@ body {
 </head>
 
   <body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+
+ 
+  <div class="flash-messages">
+      <% flash.each do |type, message| %>
+        <% if type.in?(%w[success error]) && controller_name == 'admin' %>
+          <div class="flash-message flash-<%= type %>">
+            <%= message %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="flash-messages">
+  <% flash.each do |type, message| %>
+    <div class="flash-message flash-<%= type %>">
+      <%= message %>
+    </div>
+  <% end %>
+</div>
+
+<div class="flash-messages">
+  <% flash.each do |type, message| %>
+    <% flash_class = case type.to_sym
+                     when :notice then 'flash-success'
+                     when :alert then 'flash-error'
+                     else "flash-#{type}"
+                     end %>
+    <div class="flash-message <%= flash_class %>">
+      <%= message %>
+    </div>
+  <% end %>
+</div>
+
+
+
+
+
+    <% if flash[:alert] %>
+    <div class="flash-messages">
+      <div class="flash-message flash-error">
+        <%= flash[:alert] %>
+      </div>
+    </div>
+  <% end %>
+
     <%= yield %>
  <script>
  document.addEventListener('DOMContentLoaded', () => {

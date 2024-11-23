@@ -12,9 +12,16 @@
         <% nav_links = [
           { name: 'Home', path: '/student' },
           { name: 'Grafik', path: '/cours' },
-          { name: 'Moje Zajęcia', path: '/my_course' },
+         
       
         ] %>
+        <% dropdown = {
+          name: 'Moje Zajęcia',
+          items: [
+            { name: 'Zapisany na kursy', path: '/my_course' },
+            { name: 'Zapisany na lekcje', path: '/my_lesson' }
+          ]
+        } %>
       <% elsif current_user.role == 'teacher' %>
         <% nav_links = [
           { name: 'Home', path: '/teacher' },
@@ -24,12 +31,30 @@
         ] %>
       <% end %>
 <% end %>
-    <ul class="nav nav-pills navbar-left">
-      <% nav_links.each do |link| %>
-        <li class="<%= 'active' if link[:active] %>">
-          <a href="<%= link[:path] %>"><%= link[:name] %></a>
-        </li>
-      <% end %>
+     <ul class="nav nav-pills navbar-left">
+    <% nav_links.each do |link| %>
+      <li class="nav-item <%= 'active' if link[:active] %>">
+        <a class="nav-link" href="<%= link[:path] %>"><%= link[:name] %></a>
+      </li>
+    <% end %>
+
+     <% if dropdown %>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <%= dropdown[:name] %>
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <% dropdown[:items].each_with_index do |item, index| %>
+          <li>
+            <a class="dropdown-item" href="<%= item[:path] %>"><%= item[:name] %></a>
+          </li>
+          <% if index < dropdown[:items].length - 1 %>
+            <li><hr class="dropdown-divider"></li>
+          <% end %>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
     </ul>
 
   
@@ -66,7 +91,7 @@
         <i class="fas fa-phone fa-2x"></i>
         <%= f.label :phone_number, "Numer telefonu",style:"font-size:20px; padding-left: 10px;", for: "phone_number" %>
       </span>
-      <%= f.text_field :phone_number, required: true,  autocomplete: "phone_number",class: "form-control", placeholder: "Numer telefonu" %>
+      <%= f.text_field :phone_number, required: true,   autocomplete: "phone_number",class: "form-control", placeholder: "Numer telefonu" %>
     </div>
   </div>
 </div>
@@ -79,11 +104,21 @@
 <%= f.text_field :address, required: true,  autocomplete: "address",class: "form-control", placeholder: "Adres zamieszkania" %>
 </div>
 
+<% if current_user.role == 'teacher' %>
+<div class="input-group mb-3">
+<span class="input-group-text">
+  <i class="fas fa-rectangle-list fa-2x" ></i>
+  <%= f.label :description, "Opis",style:"font-size:20px; padding-left: 10px;", for: "description" %>
+</span>
+<%= f.text_field :description, required: true,  autocomplete: "description",class: "form-control", placeholder: "Description" %>
+</div>
+<% end %>
+
 <% tooltip_text = "Jeżeli nie chcesz zmieniać hasła, pozostaw pole puste. Minimalna długość: #{@minimum_password_length} znaków" %>
 <div class="input-group mb-3">
-  <span class="input-group-text tooltip-custom" 
+  <span class="input-group-text" 
         data-bs-toggle="tooltip" 
-        data-bs-placement="top" 
+        data-bs-placement="bottom" 
         title="<%= tooltip_text %>">
     <i class="fas fa-lock fa-2x"></i>
     <%= f.label :password, "Hasło", style: "font-size:20px; padding-left: 10px;", for: "password" %>
@@ -91,24 +126,24 @@
   <%= f.password_field :password, class: "form-control", placeholder: "Hasło" %>
 </div>
 
-
-
-
-
 <div class="input-group mb-3">
 <span class="input-group-text">
   <i class="fas fa-lock fa-2x"></i>
   <%= f.label :password_confirmation, "Potwierdź hasło",style:"font-size:20px; padding-left: 10px;", for: "phone_number" %>
 </span>
-<%= f.password_field :password_confirmation, required: true, class: "form-control", placeholder: "Potwierdź hasło" %>
+<%= f.password_field :password_confirmation, class: "form-control", placeholder: "Potwierdź hasło" %>
 </div>
 
 <div class="input-group mb-3">
-<span class="input-group-text">
+<span class="input-group-text " 
+        data-bs-toggle="tooltip" 
+        data-bs-placement="bottom" 
+        title="Wprowadź obecne hasło w celu autoryzacji">
   <i class="fas fa-lock fa-2x"></i>
+  <i class="fa-solid fa-exclamation fa-3x"></i>
   <%= f.label :current_password, "Obecne hasło",style:"font-size:20px; padding-left: 10px;", for: "current_password" %>
 </span>
-<%= f.password_field :current_password, required: true, class: "form-control", placeholder: "Obecne hasło" %>
+<%= f.password_field :current_password, class: "form-control", placeholder: "Obecne hasło" %>
 </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -129,6 +164,3 @@
 </div>
 </div>
 
-<footer class="footer">
-    <p>&copy; 2024 Dance School</p>
-</footer>

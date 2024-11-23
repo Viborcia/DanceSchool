@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   end
   
   #get 'student/home'
-  devise_for :users, controllers: {  registrations: 'registrations' }
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
 
   #get 'main/main_stage'
 
@@ -36,7 +38,7 @@ Rails.application.routes.draw do
   #student
   get 'student', to: "student#home", as: 'student'
   get 'grafik', to: "student#grafik", as: 'grafik'
-  get 'instructor_grafik', to: "main#instructor_grafik", as: 'instructor_grafik'
+  get 'instructor_harmonogram', to: "main#instructor_harmonogram", as: 'instructor_harmonogram'
   get 'my_course', to: "student#my_course", as: 'my_course'
   get 'my_lesson', to: "student#my_lesson", as: 'my_lesson'
   get 'student_profile', to: "student#student_profile", as: 'student_profile'
