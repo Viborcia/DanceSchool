@@ -1,20 +1,58 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
-    <div class="navbar-header ">
-    <a class="navbar-brand" href="#">
-    <%= image_tag 'logo2.jpg', id: 'Logo' %> Dance School
-  </a>
-  
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <%= image_tag 'logo2.jpg', id: 'Logo' %> Dance School
+      </a>
     </div>
+    
+    <% nav_links = [] %>
+    <% if current_user %>
+      <% if current_user.role == 'student' %>
+        <% nav_links = [
+          { name: 'Home', path: '/student' },
+          { name: 'Instruktorzy', path: '/instructors' , active: true},
+           { name: 'Grafik', path: '/cours'},
+          { name: 'Moje Zajęcia', path: '/my_course' },
+        ] %>
+      <% elsif current_user.role == 'teacher' %>
+        <% nav_links = [
+          { name: 'Home', path: '/teacher' },
+          { name: 'Grafik', path: '/cours' , active: true},
+          { name: 'Prowadzone Zajęcia', path: '/own_course' },
+        ] %>
+      <% end %>
+    <% else %>
+      <% nav_links = [
+        { name: 'Home', path: '/main_stage' },
+        { name: 'Instruktorzy', path: '/instructors', active: true  },
+        { name: 'Kursy', path: '/cours'},
+        { name: 'Pomoc', path: '/help' },
+        { name: 'Kontakt', path: '/contact' }
+      ] %>
+    <% end %>
+
     <ul class="nav nav-pills navbar-left">
-      <li><a href="/main_stage">Home</a></li>
-      <li class="active"><a href="/instructors">Instruktorzy</a></li>
-      <li><a href="/cours">Kursy</a></li>
-      <li><a href="/help">Pomoc</a></li>
+      <% nav_links.each do |link| %>
+        <li class="<%= 'active' if link[:active] %>">
+          <a href="<%= link[:path] %>"><%= link[:name] %></a>
+        </li>
+      <% end %>
     </ul>
     <div class="navbar-right" style="display: flex; align-items: center; margin-left: 10px;">
-      <button type="button" class="btn btn-primary btn btn-default navbar-btn"><%= link_to "Zarejestruj się", new_user_registration_path, style:"color:white; text-decoration: none;" %></button>
-      <button type="button" class="btn btn-primary btn btn-default navbar-btn"><%= link_to "Zaloguj się", new_user_session_path, style:"color:white; text-decoration: none;" %></button>
+      <% if current_user %>
+        <button type="button" class="btn btn-primary navbar-btn">
+          <%= link_to "Profil", current_user.role == 'student' ? "/student_profile" : "/teacher_profile", style: "color:white; text-decoration: none;" %>
+        </button>
+        <%= button_to "Wyloguj się", destroy_user_session_path, method: :delete, class: "btn btn-primary navbar-btn", style: "color:white; text-decoration: none;" %>
+      <% else %>
+        <button type="button" class="btn btn-primary navbar-btn">
+          <%= link_to "Zarejestruj się", new_user_registration_path, style: "color:white; text-decoration: none;" %>
+        </button>
+        <button type="button" class="btn btn-primary navbar-btn">
+          <%= link_to "Zaloguj się", new_user_session_path, style: "color:white; text-decoration: none;" %>
+        </button>
+      <% end %>
     </div>
   </div>
 </nav>
@@ -26,14 +64,17 @@
   <div class="row">
     <% @instructors.each do |user| %>
       <div class="col-md-4 mb-4">
-        <div class="card shadow-lg border-light rounded">
-          <div class="card-body text-center">
-            <h5 class="card-title instructor-name">
+        <div class="card shadow-lg border-light rounded h-100 d-flex flex-column">
+          <div class="card-header instructor-card-header">
+            <h5 class="mb-0 text-center">
               <%= user.first_name %> <%= user.last_name %>
             </h5>
-            <hr class="instructor-divider">
+          </div>
+          <div class="card-body text-center flex-grow-1">
             <p class="card-text instructor-description"><%= user.description %></p>
-            <%= link_to "Pokaż grafik instruktora", instructor_grafik_path(user), class: "btn btn-primary btn-lg", style: "color:white; text-decoration: none;" %>
+          </div>
+          <div class="mt-auto text-center pb-3">
+<%= link_to "Pokaż grafik instruktora", instructor_grafik_main_path(user), class: "btn btn-primary btn-lg", style: "color:white; text-decoration: none;" %>
           </div>
         </div>
       </div>
@@ -42,32 +83,3 @@
 </div>
 
 
-
-<script>
-
-function redirectToMatchingBookmark() {
- 
-    var searchText = document.getElementById('searchInput').value.toLowerCase();
-
-    var bookmarks = document.querySelectorAll('.bookmark');
-
-    for (var i = 0; i < bookmarks.length; i++) {
-        var bookmark = bookmarks[i];
-      
-        var bookmarkText = bookmark.innerText.toLowerCase();
-
-        if (bookmarkText.includes(searchText)) {
-            // Przekieruj do pasującej zakładki
-            window.location.href = bookmark.href;
-            return;
-        }
-    }
-
-    alert("Nie znaleziono pasującej zakładki");
-}
-
-document.getElementById('searchButton').addEventListener('click', function() {
-    redirectToMatchingBookmark();
-});
-
-</script>

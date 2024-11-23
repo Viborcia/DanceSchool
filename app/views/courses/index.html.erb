@@ -12,7 +12,8 @@
     <% if current_user.role == 'student' %>
     <% nav_links = [
       { name: 'Home', path: '/student' },
-      { name: 'Grafik', path: '/cours', active: true }
+      { name: 'Instruktorzy', path: '/instructors'},
+          { name: 'Grafik', path: '/cours', active: true  },
     ] %>
   
     <% dropdown = {
@@ -26,7 +27,7 @@
       <% elsif current_user.role == 'teacher' %>
         <% nav_links = [
           { name: 'Home', path: '/teacher' },
-          { name: 'Grafik', path: '/cours', active: true },
+          { name: 'Grafik', path: '/cours', active: true  },
           { name: 'Prowadzone Zajęcia', path: '/own_course' },
         ] %>
       <% end %>

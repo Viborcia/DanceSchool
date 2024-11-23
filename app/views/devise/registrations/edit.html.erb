@@ -11,9 +11,8 @@
       <% if current_user.role == 'student' %>
         <% nav_links = [
           { name: 'Home', path: '/student' },
+          { name: 'Instruktorzy', path: '/instructors'},
           { name: 'Grafik', path: '/cours' },
-         
-      
         ] %>
         <% dropdown = {
           name: 'Moje Zajęcia',

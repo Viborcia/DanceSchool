@@ -1,0 +1,41 @@
+<div class="container my-4" style="max-width: 900px; padding-left: 30px; padding-right: 30px;">
+  <div class="row">
+    <div class="col-md-3 col-sm-6 mb-4" id="<%= dom_id course %>">
+      <div class="card course-card" style="min-height: 250px; min-width: 200px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);">
+        <div class="card-header course-card-header">
+          <h5 class="mb-0">
+            <center><%= course.name %></center>
+          </h5>
+        </div>
+        <center>   <div class="card-body d-flex align-items-center justify-content-between">
+          <div class="course-details pr-3" style="flex: 1;">
+            <p>
+              <i class="fas fa-calendar-day" data-bs-toggle="tooltip" title="Dzień"></i>
+              <%= course.weekday == 0 ? "Niedziela" : course.weekday == 1 ? "Poniedziałek" : course.weekday == 2 ? "Wtorek" : course.weekday == 3 ? "Środa" : course.weekday == 4 ? "Czwartek" : course.weekday == 5 ? "Piątek" : "Sobota" %>
+            </p>
+            <p>
+              <i class="fas fa-clock" data-bs-toggle="tooltip" title="Godzina"></i>
+              <%= course.start_date.strftime("%H:%M") %>
+            </p>
+            <p>
+              <i class="fas fa-gem" data-bs-toggle="tooltip" title="Poziom"></i>
+              <%= course.level %>
+            </p>
+            <p>
+            <i class="fas fa-chalkboard-teacher" data-bs-toggle="tooltip" title="Instruktor"></i>
+            <%= course.instructor&.first_name %> <%= course.instructor&.last_name %>
+          </p>
+            <p>
+              <i class="fas fa-calendar-alt" data-bs-toggle="tooltip" title="Data rozpoczęcia"></i>
+              <%= course.start_date.strftime("%Y-%m-%d") %>
+            </p>
+            <%= link_to "Pokaż kurs", course_path(course) , class: "btn btn-primary", style: "color:white; text-decoration: none;" %>
+          </div>
+      
+        </div></center>  
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   resources :courses do
     post 'unenroll', on: :member
   end
-  
+
+
   #get 'student/home'
   devise_for :users, controllers: {
     registrations: 'users/registrations'
@@ -31,6 +32,7 @@ Rails.application.routes.draw do
   root "main#main_stage"
   get 'main_stage', to: "main#main_stage", as: 'danceschool'
   get 'instructors', to: "main#instructors", as: 'instructors'
+  get 'users/:id/instructor_grafik', to: 'main#instructor_grafik', as: 'instructor_grafik_main'
   get 'cours', to: "courses#index", as: 'cours'
   get 'help', to: "main#help", as: 'help'
   get 'contact', to: "main#contact", as: 'contact'
@@ -46,7 +48,7 @@ Rails.application.routes.draw do
 
   #teacher
   get 'teacher', to: "teacher#home", as: 'teacher'
-  get 'instructor_grafik', to: "teacher#instructor_grafik", as: 'instructor_grafik'
+  get 'instructors_grafik', to: "teacher#instructors_grafik", as: 'instructors_grafik'
   get 'own_course', to: "teacher#own_course", as: 'own_course'
   get 'teacher_profile', to: "teacher#teacher_profile", as: 'teacher_profile'
   get 'teacher_sign_out', to: 'teacher#teacher_sign_out', as: 'teacher_sign_out'
