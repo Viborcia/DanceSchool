@@ -70,6 +70,7 @@ class CoursesController < ApplicationController
     if course.users.include?(current_user)
       course.users.delete(current_user)
       flash[:notice] = "Wypisałeś się z kursu."
+      course.update(number_of_place: course.number_of_place + 1)
     else
       flash[:alert] = "Nie jesteś zapisany na ten kurs."
     end

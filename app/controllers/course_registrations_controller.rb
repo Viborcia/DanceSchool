@@ -12,6 +12,7 @@ class CourseRegistrationsController < ApplicationController
           # Dodanie użytkownika do kursu
           course.users << current_user
           redirect_to course, notice: 'Zostałeś pomyślnie zapisany na kurs!'
+          course.update(number_of_place: course.number_of_place - 1)
         end
       end
 end
