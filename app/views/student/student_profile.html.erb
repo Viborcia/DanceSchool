@@ -1,73 +1,95 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
-    <div class="navbar-header ">
-    <a class="navbar-brand" href="#">
-    <%= image_tag 'logo2.jpg', id: 'Logo' %> Dance School
-  </a>
-  
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <%= image_tag 'logo2.jpg', id: 'Logo' %> Dance School
+      </a>
     </div>
     <ul class="nav nav-pills navbar-left">
     <li><a href="/student">Home</a></li>
       <li><a href="/cours">Grafik</a></li>
-      <li><a href="/my_course">Moje Zajęcia</a></li>
-     
+      <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Moje Zajęcia
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li>
+          <a class="dropdown-item text-white" href="/my_course">Zapisany na kursy</a>
+        </li>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        <li>
+          <a class="dropdown-item text-white" href="/my_lesson">Zapisany na lekcje</a>
+        </li>
+      </ul>
+    </li>
     </ul>
-   
     <div class="navbar-right" style="display: flex; align-items: center; margin-left: 10px;">
-      <button type="button" class="btn btn-primary btn btn-default navbar-btn"><%= link_to "Profil", "/student_profile", style:"color:white; text-decoration: none;" %></button>
-<%= button_to "Wyloguj się", destroy_user_session_path, method: :delete, class: "btn btn-primary btn-default navbar-btn", style: "color:white; text-decoration: none;" %>
+      <button type="button" class="btn btn-primary navbar-btn">
+        <%= link_to "Profil",'/teacher_profile' , style: "color:white; text-decoration: none;" %>
+      </button>
+      <%= button_to "Wyloguj się", destroy_user_session_path, method: :delete, class: "btn btn-primary navbar-btn", style: "color:white; text-decoration: none;" %>
     </div>
   </div>
 </nav>
 
-
 <center>
-<div class="card" style="width: 20rem; margin-top:20px;">
-  <div class="card-body">
-    <h5 class="card-title fw-lighter"><b><span class="badge text-bg-primary" style="font-size:20px">Twój profil</span></b></h5>
-    <p class="card-text fw-lighter" style="text-align:left;">Tutaj możesz zobaczyć informacje o swoim profilu.</p>
-    <button type="button" class="btn btn-primary btn btn-default navbar-btn"><%= link_to "Edytuj profil", edit_user_registration_path, style:"color:white; text-decoration: none;" %></button>  
+<div class="card shadow-lg" style="width: 50rem; margin-top: 40px; border: none; background-color: #f9f9f9; border-radius: 12px; overflow: hidden;">
+  <div class="card-header text-white" style="background-color: #a970d4; padding: 20px; text-align: center;">
+    <h2 class="card-title fw-bold" style="margin: 0;" >
+      <i class="fas fa-user-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Twój profil"></i> 
+      Twój Profil
+    </h2>
+  </div>
+  <div class="card-body" style="padding: 30px;">
+    <p class="card-text" style="font-size: 16px; text-align: center; color: #555;">Tutaj znajdziesz swoje dane profilowe. W razie potrzeby możesz je edytować.</p>
+    <div class="text-center" style="margin-bottom: 10px;">
+      <button type="button" class="btn btn-primary btn-lg">
+        <%= link_to "Edytuj profil", edit_user_registration_path, style: "color:white; text-decoration: none;" %>
+      </button>
     </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item fw-lighter" style="text-align:left;"><span style="font-weight:500">E-mail:</span> <%= current_user.email %></li>
-    <li class="list-group-item fw-lighter" style="text-align:left"><span style="font-weight:500">Numer Telefonu:</span> <%= current_user.phone_number %></b></li>
-    <li class="list-group-item fw-lighter" style="text-align:left"><span style="font-weight:500">Imię:</span> <%= current_user.first_name %></b></li>
-    <li class="list-group-item fw-lighter" style="text-align:left"><span style="font-weight:500">Nazwisko:</span> <%= current_user.last_name %></b></li>
-    <li class="list-group-item fw-lighter" style="text-align:left"><span style="font-weight:500">Rola:</span> <%= current_user.role %></b></li>
-    <li class="list-group-item fw-lighter" style="text-align:left"><span style="font-weight:500">Płeć:</span> <%= current_user.gender == 'woman' ? 'kobieta' : 'mężczyzna' %></b></li>
-  </ul>
+    <div style="padding: 15px; border: 1px solid #ddd; border-radius: 10px; background-color: #fff;">
+      <ul class="list-group list-group-flush" style="margin: 0;">
+      <div class="row mb-3">
+      <div class="col-md-6">
+        <li class="list-group-item" style="border: none; padding:10px 10px;">
+          <strong style="margin-left: 10px;">Imię:</strong> <%= current_user.first_name %>
+        </li>
+      </div>
+      <div class="col-md-6">
+        <li class="list-group-item" style="border: none; padding: 10px 0px;">
+          <strong style="margin-left: 10px;">Nazwisko:</strong> <%= current_user.last_name %>
+        </li>
+      </div>
+    </div>  
+      <li class="list-group-item" style="border: none; padding: 10px 10px;">
+          <i class="fas fa-envelope" data-bs-toggle="tooltip" data-bs-placement="top" title="E-mail"></i>
+          <strong style="margin-left: 10px;">E-mail:</strong> <%= current_user.email %>
+        </li>
+        <li class="list-group-item" style="border: none; padding: 10px 10px;">
+          <i class="fas fa-phone" data-bs-toggle="tooltip" data-bs-placement="top" title="Numer Telefonu"></i>
+          <strong style="margin-left: 10px;">Numer Telefonu:</strong> <%= current_user.phone_number %>
+        </li>
+        <li class="list-group-item" style="border: none; padding: 10px 10px;">
+        <i class="fas fa-map-marker-alt " data-bs-toggle="tooltip" data-bs-placement="top" title="Adres zamieszkania"></i>
+        <strong style="margin-left: 10px;">Adres zamieszkania:</strong> <%= current_user.address %>
+      </li>
+        
+        <li class="list-group-item" style="border: none; padding: 10px 10px;">
+          <i class="fas fa-user-tag" data-bs-toggle="tooltip" data-bs-placement="top" title="Rola"></i>
+          <strong style="margin-left: 10px;">Rola:</strong> <%= current_user.role == 'teacher' ? 'Instruktor' : 'Kursant' %>
+        </li>
+        <li class="list-group-item" style="border: none; padding: 10px 10px;">
+          <i class="fas fa-venus-mars" data-bs-toggle="tooltip" data-bs-placement="top" title="Płeć"></i>
+          <strong style="margin-left: 10px;">Płeć:</strong> <%= current_user.gender == 'woman' ? 'Kobieta' : 'Mężczyzna' %>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
 </center>
 
-<footer class="footer">
-    <p>&copy; 2024 Dance School</p>
-</footer>
 
-<script>
 
-function redirectToMatchingBookmark() {
- 
-    var searchText = document.getElementById('searchInput').value.toLowerCase();
 
-    var bookmarks = document.querySelectorAll('.bookmark');
-
-    for (var i = 0; i < bookmarks.length; i++) {
-        var bookmark = bookmarks[i];
-      
-        var bookmarkText = bookmark.innerText.toLowerCase();
-
-        if (bookmarkText.includes(searchText)) {
-            // Przekieruj do pasującej zakładki
-            window.location.href = bookmark.href;
-            return;
-        }
-    }
-
-    alert("Nie znaleziono pasującej zakładki");
-}
-
-document.getElementById('searchButton').addEventListener('click', function() {
-    redirectToMatchingBookmark();
-});
-
-</script>

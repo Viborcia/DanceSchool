@@ -9,12 +9,20 @@
     
     <% nav_links = [] %>
     <% if current_user %>
-      <% if current_user.role == 'student' %>
-        <% nav_links = [
-          { name: 'Home', path: '/student' },
-          { name: 'Grafik', path: '/cours' , active: true},
-          { name: 'Moje Zajęcia', path: '/my_course' },
-        ] %>
+    <% if current_user.role == 'student' %>
+    <% nav_links = [
+      { name: 'Home', path: '/student' },
+      { name: 'Grafik', path: '/cours', active: true }
+    ] %>
+  
+    <% dropdown = {
+      name: 'Moje Zajęcia',
+      items: [
+        { name: 'Zapisany na kursy', path: '/my_course' },
+        { name: 'Zapisany na lekcje', path: '/my_lesson' }
+      ]
+    } %>
+ 
       <% elsif current_user.role == 'teacher' %>
         <% nav_links = [
           { name: 'Home', path: '/teacher' },
@@ -28,16 +36,33 @@
         { name: 'Instruktorzy', path: '/instructors' },
         { name: 'Kursy', path: '/cours', active: true },
         { name: 'Pomoc', path: '/help' },
-        { name: 'Kontakt', path: '/contact' }
       ] %>
     <% end %>
 
     <ul class="nav nav-pills navbar-left">
-      <% nav_links.each do |link| %>
-        <li class="<%= 'active' if link[:active] %>">
-          <a href="<%= link[:path] %>"><%= link[:name] %></a>
-        </li>
-      <% end %>
+    <% nav_links.each do |link| %>
+      <li class="nav-item <%= 'active' if link[:active] %>">
+        <a class="nav-link" href="<%= link[:path] %>"><%= link[:name] %></a>
+      </li>
+    <% end %>
+
+     <% if dropdown %>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <%= dropdown[:name] %>
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <% dropdown[:items].each_with_index do |item, index| %>
+          <li>
+            <a class="dropdown-item" href="<%= item[:path] %>"><%= item[:name] %></a>
+          </li>
+          <% if index < dropdown[:items].length - 1 %>
+            <li><hr class="dropdown-divider"></li>
+          <% end %>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
     </ul>
     <div class="navbar-right" style="display: flex; align-items: center; margin-left: 10px;">
       <% if current_user %>
@@ -57,8 +82,6 @@
   </div>
 </nav>
 
-
-<p style="color: green"><%= notice %></p>
 
 <div style="display: flex; align-items: center; justify-content: center; position: relative; margin-bottom: 20px;">
   <h2 style="text-align: center; flex: 1;">Kursy</h2>

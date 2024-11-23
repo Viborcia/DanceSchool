@@ -1,66 +1,64 @@
-
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
-    <div class="navbar-header ">
-    <a class="navbar-brand" href="#">
-    <%= image_tag 'logo2.jpg', id: 'Logo' %> Dance School
-  </a>
-  
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <%= image_tag 'logo2.jpg', id: 'Logo' %> Dance School
+      </a>
     </div>
     <ul class="nav nav-pills navbar-left">
-    <li class="active"><a href="/student">Home</a></li>
+      <li class="active"><a href="/student">Home</a></li>
       <li><a href="/cours">Grafik</a></li>
-      <li><a href="/my_course">Moje Zajęcia</a></li>
-      <li><a href="/student_profile">Profil</a></li>
-      <li><a href="/student_sign_out">Wyloguj</a></li>
+      <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Moje Zajęcia
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li>
+          <a class="dropdown-item text-white" href="/my_course">Zapisany na kursy</a>
+        </li>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        <li>
+          <a class="dropdown-item text-white" href="/my_lesson">Zapisany na lekcje</a>
+        </li>
+      </ul>
+    </li>
     </ul>
-    <form class="navbar-form navbar-right" style="display: flex; align-items: center;">
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Szukaj na stronie...">
-      </div>
-      <button type="submit" class="btn btn-default" id="searchButton"><b> 🔎 </b></button>
-    </form>
     <div class="navbar-right" style="display: flex; align-items: center; margin-left: 10px;">
-      <button type="button" class="btn btn-primary btn btn-default navbar-btn"><%= link_to "Profil", "/student_profile", style:"color:white; text-decoration: none;" %></button>
-<%= button_to "Wyloguj się", destroy_user_session_path, method: :delete, class: "btn btn-primary btn-default navbar-btn", style: "color:white; text-decoration: none;" %>
+      <button type="button" class="btn btn-primary btn btn-default navbar-btn">
+        <%= link_to "Profil", "/student_profile", style: "color:white; text-decoration: none;" %>
+      </button>
+      <%= button_to "Wyloguj się", destroy_user_session_path, method: :delete, class: "btn btn-primary btn-default navbar-btn", style: "color:white; text-decoration: none;" %>
     </div>
   </div>
 </nav>
 
+<div class="main" style="display: flex; align-items: center; align-items: flex-start; justify-content: center; margin-top: 0; padding-top: 0;">
+  <div style="flex: 1; text-align: center;">
+    <%= video_tag 'student_dance.mp4',  autoplay: true,
+    loop: true,
+    muted: true,
+    controls: false, 
+    controlslist: 'nodownload noremoteplayback', 
+    disablepictureinpicture: true, 
+    size: "540x960",
+    style: "max-width: 100%;" %>
+  </div>
 
+  <div style="flex: 1; text-align: left;">
+    <h2>Witaj, <%= current_user.first_name %>!</h2>
+    <p>
+      Cieszymy się, że rozpoczynasz swoją cudowną przygodę z tańcem w naszej szkole! <br>
+      Oferujemy szeroki wybór kursów dopasowanych do każdego poziomu – od początkujących po zaawansowanych. 
+      Możesz już teraz zapisywać się na zajęcia, poznawać nowych ludzi i rozwijać swoją pasję. <br><br>
+      Taniec to nie tylko ruch, to język ciała, który pozwala wyrazić emocje i spełniać marzenia.
+    </p>
+    <p style="font-weight: bold; font-size: 18px; margin-top: 20px;">
+      "Nigdy nie rezygnuj z marzeń, bo taniec to podróż, a nie cel. Ruszaj na parkiet i bądź najlepszą wersją siebie!"
+    </p>
+  </div>
 </div>
-<li>Witaj <%= current_user.first_name %>!</li>
-Witamy w naszej szkole tańca! Cieszymy się, że dołączasz do naszej tanecznej społeczności. Oferujemy szeroki wybór kursów dla każdego – od początkujących po zaawansowanych, od tańca towarzyskiego po hip-hop. Niezależnie od Twojego poziomu umiejętności, znajdziesz u nas idealne zajęcia, które pozwolą Ci rozwijać swoją pasję do tańca, poprawić kondycję i poznać nowych przyjaciół. Do zobaczenia na parkiecie!
 
-<footer class="footer">
-    <p>&copy; 2024 Dance School</p>
-</footer>
 
-<script>
 
-function redirectToMatchingBookmark() {
- 
-    var searchText = document.getElementById('searchInput').value.toLowerCase();
-
-    var bookmarks = document.querySelectorAll('.bookmark');
-
-    for (var i = 0; i < bookmarks.length; i++) {
-        var bookmark = bookmarks[i];
-      
-        var bookmarkText = bookmark.innerText.toLowerCase();
-
-        if (bookmarkText.includes(searchText)) {
-            // Przekieruj do pasującej zakładki
-            window.location.href = bookmark.href;
-            return;
-        }
-    }
-
-    alert("Nie znaleziono pasującej zakładki");
-}
-
-document.getElementById('searchButton').addEventListener('click', function() {
-    redirectToMatchingBookmark();
-});
-
-</script>

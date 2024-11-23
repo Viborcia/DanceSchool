@@ -1,82 +1,53 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
-    <div class="navbar-header ">
-    <a class="navbar-brand" href="#">
-    <%= image_tag 'logo2.jpg', id: 'Logo' %> Dance School
-  </a>
-  
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <%= image_tag 'logo2.jpg', id: 'Logo' %> Dance School
+      </a>
     </div>
     <ul class="nav nav-pills navbar-left">
-    <li class="active"><a href="/main_stage">Home</a></li>
-    <li><a href="/instructors">Instruktorzy</a></li>
-    <li><a href="/cours">Kursy</a></li>
+      <li class="active"><a href="/main_stage">Home</a></li>
+      <li><a href="/instructors">Instruktorzy</a></li>
+      <li><a href="/cours">Kursy</a></li>
       <li><a href="/help">Pomoc</a></li>
-      <li><a href="/contact">Kontakt</a></li>
     </ul>
-    <form class="navbar-form navbar-right" style="display: flex; align-items: center;">
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Szukaj na stronie...">
-      </div>
-      <button type="submit" class="btn btn-default" id="searchButton"><b> 🔎 </b></button>
-    </form>
     <div class="navbar-right" style="display: flex; align-items: center; margin-left: 10px;">
-      <button type="button" class="btn btn-primary btn btn-default navbar-btn"><%= link_to "Zarejestruj się", new_user_registration_path, style:"color:white; text-decoration: none;" %></button>
-      <button type="button" class="btn btn-primary btn btn-default navbar-btn"><%= link_to "Zaloguj się", new_user_session_path, style:"color:white; text-decoration: none;" %></button>
+      <button type="button" class="btn btn-primary btn btn-default navbar-btn">
+        <%= link_to "Zarejestruj się", new_user_registration_path, style: "color:white; text-decoration: none;" %>
+      </button>
+      <button type="button" class="btn btn-primary btn btn-default navbar-btn">
+        <%= link_to "Zaloguj się", new_user_session_path, style: "color:white; text-decoration: none;" %>
+      </button>
     </div>
   </div>
 </nav>
+  <div style="text-align: center; margin: 40px 20px;">
+    <h2>O aplikacji Dance School</h2>
+    <p>
+    Dance School to nowoczesne i zaawansowane narzędzie, które zostało stworzone z myślą o szkołach tańca. Ułatwia organizację i zarządzanie codziennymi zadaniami, abyś mógł skupić się na swojej pasji – tańcu! Oto, co umożliwia    </p>
+    <ul style="list-style-type: disc; display: inline-block; text-align: left;">
+      <li><strong>Planowanie zajęć i grafików:</strong> Szybko i wygodnie zaplanujesz harmonogram dla swoich kursów.</li>
+      <li><strong>Zapisy na zajęcia:</strong> Po zalogowaniu możesz zapisać się na wybrane kursy taneczne lub pojedyncze lekcje, jeśli chcesz je najpierw przetestować.</li>
+      <li><strong>Przegląd zapisanych kursów:</strong> Sprawdzaj listę kursów, na które jesteś zapisany, i monitoruj swoje postępy.</li>
+      <li><strong>Zarządzanie kursami:</strong> Dodawanie nowych kursów i edytowanie istniejących staje się niezwykle proste.</li>
+      <li><strong>Profil użytkownika:</strong> Zarządzaj swoimi danymi w jednym miejscu.</li>
+    </ul>
+    <p>
+      Odkryj nowoczesny sposób zarządzania szkołą tańca i skup się na tym, co naprawdę kochasz - tańcu!
+    </p>
+  </div>
 
-
-<div class="main">
-<center>Witaj w systemie zarządzania szkołą tańca!</center>
-
-<div class="lewy">
-<p>DanceMaster to zaawansowana aplikacja, która została stworzona z myślą o właścicielach i instruktorach szkół tańca. 
-Nasze narzędzie ułatwia codzienne zarządzanie, organizację zajęć i komunikację z uczniami, dzięki czemu możesz skupić się na tym, co naprawdę kochasz tańcu!
-<span class="tekst">DanceMaster</span> bez ruszania się z domu. </p>
-<ul>
-  <li>Funkcje DanceMaster:</li>
-  <li>Planowanie Zajęć: Twórz harmonogramy zajęć, przypisuj instruktorów i zarządzaj zapisami uczniów w jednym miejscu.</li>
-  <li>Rejestracja i Płatności: Umożliwiaj łatwą rejestrację online oraz zarządzaj płatnościami i fakturami.</li>
-  <li>Komunikacja: Wysyłaj powiadomienia, wiadomości i przypomnienia bezpośrednio do swoich uczniów.</li>
-    <li>Zarządzanie Instruktorami: Monitoruj grafiki instruktorów, ich dostępność oraz efektywność pracy.</li>
-    <li>Analiza i Raportowanie: Śledź postępy, analizuj wyniki finansowe i generuj szczegółowe raporty.</li>
-</ul>
-<p>Zarejestruj się i zobacz, jak DanceMaster może odmienić Twoją szkołę tańca. Skontaktuj się z nami, aby dowiedzieć się więcej lub rozpocząć darmowy okres próbny.</p>
+  <div style="text-align: center; margin: 40px 0;">
+    <h3>Zarejestruj się już teraz i zacznij korzystać z Dance School!</h3>
+    <button class="btn btn-primary" style="font-size: 18px;">
+      <%= link_to "Załóż konto", new_user_registration_path, style: "color: white; text-decoration: none;" %>
+    </button>
+  </div>
 </div>
 
+<div style="text-align: center; margin: 20px 0;">
+  <%= video_tag 'dance_main_stage.mp4', autoplay: true, loop: true, muted: true, controls: false, size: '80%' %>
 </div>
-</div>
 
-<footer class="footer">
-    <p>&copy; 2024 Dance School</p>
-</footer>
 
-<script>
 
-function redirectToMatchingBookmark() {
- 
-    var searchText = document.getElementById('searchInput').value.toLowerCase();
-
-    var bookmarks = document.querySelectorAll('.bookmark');
-
-    for (var i = 0; i < bookmarks.length; i++) {
-        var bookmark = bookmarks[i];
-      
-        var bookmarkText = bookmark.innerText.toLowerCase();
-
-        if (bookmarkText.includes(searchText)) {
-            // Przekieruj do pasującej zakładki
-            window.location.href = bookmark.href;
-            return;
-        }
-    }
-
-    alert("Nie znaleziono pasującej zakładki");
-}
-
-document.getElementById('searchButton').addEventListener('click', function() {
-    redirectToMatchingBookmark();
-});
-
-</script>

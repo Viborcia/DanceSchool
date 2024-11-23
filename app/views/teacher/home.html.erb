@@ -1,60 +1,41 @@
-
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
-    <div class="navbar-header ">
-    <a class="navbar-brand" href="#">
-    <%= image_tag 'logo2.jpg', id: 'Logo' %> Dance School
-  </a>
-  
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <%= image_tag 'logo2.jpg', id: 'Logo' %> Dance School
+      </a>
     </div>
     <ul class="nav nav-pills navbar-left">
     <li class="active"><a href="/teacher">Home</a></li>
       <li><a href="/cours">Grafik</a></li>
       <li><a href="/own_course">Prowadzone Zajęcia</a></li>
-
     </ul>
     <div class="navbar-right" style="display: flex; align-items: center; margin-left: 10px;">
-      <button type="button" class="btn btn-primary btn btn-default navbar-btn"><%= link_to "Profil", "/teacher_profile", style:"color:white; text-decoration: none;" %></button>
-<%= button_to "Wyloguj się", destroy_user_session_path, method: :delete, class: "btn btn-primary btn-default navbar-btn", style: "color:white; text-decoration: none;" %>
+      <button type="button" class="btn btn-primary btn btn-default navbar-btn">
+        <%= link_to "Profil", "/student_profile", style: "color:white; text-decoration: none;" %>
+      </button>
+      <%= button_to "Wyloguj się", destroy_user_session_path, method: :delete, class: "btn btn-primary btn-default navbar-btn", style: "color:white; text-decoration: none;" %>
     </div>
   </div>
 </nav>
-Witaj 
-Jako nasz instruktor, jesteś kluczowym ogniwem w tworzeniu inspirującego środowiska tanecznego. Wierzymy, że każdy z naszych uczniów zasługuje na profesjonalne nauczanie i indywidualne podejście. Oferujemy wsparcie w rozwijaniu Twoich umiejętności pedagogicznych oraz dostęp do nowoczesnych materiałów szkoleniowych. Razem możemy inspirować kolejne pokolenia tancerzy!
 
+<div class="main" style="display: flex; align-items: center; align-items: flex-start; justify-content: center; margin-top: 0; padding-top: 0;">
+  <div style="flex: 1; text-align: center;">
+    <%= video_tag 'instrutor_dance.mp4',  autoplay: true,
+    loop: true,
+    muted: true,
+    controls: false, 
+    controlslist: 'nodownload noremoteplayback', 
+    disablepictureinpicture: true, 
+    size: "540x960",
+    style: "max-width: 100%;" %>
+  </div>
+
+  <div style="flex: 1; text-align: left;">
+    <h2>Witaj, <%= current_user.first_name %>!</h2>
+    <p> Witamy w gronie pasjonatów tańca – miejscu, gdzie pasja spotyka profesjonalizm! <br> Jako instruktor w naszej szkole, stajesz się nie tylko nauczycielem, ale i inspiracją dla wielu osób, które zaczynają swoją przygodę na parkiecie lub pragną osiągnąć mistrzostwo. Twoja wiedza, energia i zaangażowanie są kluczem do rozwoju naszych uczniów i tworzenia wyjątkowej atmosfery w każdym kroku, obrocie i układzie. <br><br> Taniec to nie tylko sztuka, to historia opowiadana ruchem, a Ty jesteś jej narratorem. </p> <p style="font-weight: bold; font-size: 18px; margin-top: 20px;"> "Każdy taniec to okazja, by pokazać światu pasję, energię i charakter. Ty jesteś przewodnikiem w tej podróży – więc nauczaj z sercem i prowadź swoich uczniów ku wielkim marzeniom!" </p>
+  </div>
 </div>
 
 
 
-<footer class="footer">
-    <p>&copy; 2024 Dance School</p>
-</footer>
-
-<script>
-
-function redirectToMatchingBookmark() {
- 
-    var searchText = document.getElementById('searchInput').value.toLowerCase();
-
-    var bookmarks = document.querySelectorAll('.bookmark');
-
-    for (var i = 0; i < bookmarks.length; i++) {
-        var bookmark = bookmarks[i];
-      
-        var bookmarkText = bookmark.innerText.toLowerCase();
-
-        if (bookmarkText.includes(searchText)) {
-            // Przekieruj do pasującej zakładki
-            window.location.href = bookmark.href;
-            return;
-        }
-    }
-
-    alert("Nie znaleziono pasującej zakładki");
-}
-
-document.getElementById('searchButton').addEventListener('click', function() {
-    redirectToMatchingBookmark();
-});
-
-</script>
