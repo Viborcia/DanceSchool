@@ -9,21 +9,26 @@ class LessonsController < ApplicationController
 
   # Akcja 'enroll' zapisuje użytkownika na lekcję
   def enroll
-    if current_user.lessons.include?(@lesson)
+    lesson = Lesson.find(params[:id])
+    if lesson.users.include?(current_user)
       flash[:alert] = "Jesteś zapisany na tą lekcje."
+    elsif lesson.number_of_additional_places <= 0
+      flash[:alert] = "Brak miejsc na tą lekcje."
     else
-      current_user.lessons << @lesson
-      flash[:notice] = "Zostałeś pomyślnie zapisany na lekcje.!"
+      lesson.users << current_user
+      flash[:notice] = "Zostałeś pomyślnie zapisany na lekcje!"
+      lesson.update(number_of_additional_places: lesson.number_of_additional_places - 1)
     end
-
-    redirect_to course_path(@lesson.course)
+    redirect_to course_path(lesson.course)
   end
+  
 
   def unenroll
     lesson = Lesson.find(params[:id])
     if lesson.users.include?(current_user)
       lesson.users.delete(current_user)
       flash[:notice] = "Wypisałeś się z lekcji."
+      lesson.update(number_of_additional_places: lesson.number_of_additional_places + 1)
     else
       flash[:alert] = "Nie jesteś zapisany na tę lekcję."
     end

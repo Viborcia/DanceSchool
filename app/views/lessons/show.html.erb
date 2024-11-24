@@ -1,9 +1,38 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <%= image_tag 'logo2.jpg', id: 'Logo' %> Dance School
+      </a>
+    </div>
+    <ul class="nav nav-pills navbar-left">
+    <li><a href="/teacher">Home</a></li>
+      <li class="active"><a href="/cours">Grafik</a></li>
+      <li><a href="/own_course">Prowadzone Zajęcia</a></li>
+    </ul>
+    <div class="navbar-right" style="display: flex; align-items: center; margin-left: 10px;">
+      <button type="button" class="btn btn-primary btn btn-default navbar-btn">
+        <%= link_to "Profil", "/student_profile", style: "color:white; text-decoration: none;" %>
+      </button>
+      <%= button_to "Wyloguj się", destroy_user_session_path, method: :delete, class: "btn btn-primary btn-default navbar-btn", style: "color:white; text-decoration: none;" %>
+    </div>
+  </div>
+</nav>
+
 <h2><%= @lesson.name %></h2>
-<p><strong>Date:</strong> <%= @lesson.date.strftime("%B %d, %Y at %I:%M %p") %></p>
-<p><strong>Available Spots:</strong> <%= @lesson.number_of_additional_places %></p>
+<div class="d-flex justify-content-end" style="margin-right: 30px;margin-top: -50px; margin-bottom: 20px;">
+  <%= link_to courses_path, 
+              class: "btn btn-primary btn-lg me-2", 
+              style: "color: white; text-decoration: none;" do%>
+    <i class="fa-regular fa-circle-left"></i> Wróć
+  <% end %>
+  </div>
+<p><strong>Data:</strong> <%= @lesson.date.strftime("%d-%m-%Y") %></p>
+<p><strong>Godzina:</strong> <%= @lesson.date.strftime("%H:%M") %></p>
+<p><strong>Dostępne wolne miejsca na lekcje:</strong> <%= @lesson.number_of_additional_places %></p>
 
 <h2 class="text-primary">Zapisani kursanci</h2>
-<table class="table table-striped table-pink">
+<table class="table table-bordered table-pink">
   <thead class="bg-pink text-white">
     <tr>
       <th>Imię</th>
@@ -31,7 +60,7 @@
 </table>
 
 
-<h3 class="text-primary">Zapisani kursanci na tą lekcję</h3>
+<h2 class="text-primary">Zapisani kursanci na tą lekcję</h2>
 <table class="table table-bordered table-pink">
   <thead class="bg-pink text-white">
     <tr>
@@ -52,17 +81,3 @@
     <% end %>
   </tbody>
 </table>
-
-<% if current_user && !@lesson.users.include?(current_user) %>
-  <%= form_with url: enroll_lesson_path(@lesson), method: :post do %>
-    <%= submit_tag "Zapisz się na lekcje" %>
-  <% end %>
-<% else %>
-  <p>Jesteś zapisany na tą lekcje.</p>
-<% end %>
-
-<%= link_to 'Wróć do kursów', course_path(@lesson.course) %>
-
-<footer class="footer">
-    <p>&copy; 2024 Dance School</p>
-</footer>

@@ -8,7 +8,7 @@ class Course < ApplicationRecord
 
     def create_lessons
       number_of_lessons.times do |i|
-        lessons.create!(name: "Lekcja #{i + 1}", date: start_date + 7*i.days)
+        lessons.create!(name: "Lekcja #{i + 1}", date: start_date + 7*i.days, number_of_additional_places: 4)
       end
     end
 end

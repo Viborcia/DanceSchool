@@ -9,10 +9,16 @@
         </div>
         <div class="card-body d-flex align-items-center justify-content-between">
           <div class="lesson-details pr-3" style="flex: 1;">
-            <p>
+          <div class="row"> 
+          <p>
               <i class="fas fa-clock" data-bs-toggle="tooltip" title="Godzina"></i>
               <%= lesson.date.strftime("%H:%M") %>
             </p>
+            <p>
+            <i class="fas fa-id-badge" data-bs-toggle="tooltip" title="Liczba wolnych miejsc"></i>
+            <%= lesson.number_of_additional_places %>
+          </p>
+            </div>
             <p>
               <i class="fas fa-calendar-alt" data-bs-toggle="tooltip" title="Data"></i>
 <%= lesson.date.strftime("%d-%m-%Y") %>
@@ -31,6 +37,7 @@
                 </center>
               </div>
             <% end %>
+              
           <% end %>
         <% elsif current_user && lesson.users.include?(current_user) %>
           <%= form_with url: unenroll_lesson_path(lesson), method: :post do %>
@@ -39,7 +46,15 @@
             </div>
           <% end %>
         <% end %>
-        
+        <% if current_user && current_user.role == 'teacher' %> 
+              <div class="text-right" style="flex-shrink: 0;">
+                <center>
+                  <div class="actions" style="margin-top: 30px; margin-bottom: 20px;">
+                    <%= link_to "Podgląd", lesson, class: "btn btn-primary", style: "color:white; text-decoration: none;"%>
+                    </div>
+                </center>
+              </div>
+            <% end %>
         </div>
       </div>
     </div>
